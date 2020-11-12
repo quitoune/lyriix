@@ -22,6 +22,8 @@ class FilmsController extends AppController
             'contain' => ['Createurs', 'Modificateurs'],
         ];
         $films = $this->paginate($this->Films);
+        
+        $this->set('title', __('Films'));
 
         $this->set(compact('films'));
     }
@@ -40,9 +42,9 @@ class FilmsController extends AppController
             'contain' => ['Createurs', 'Modificateurs', 'ChansonFilms', 'ChansonFilms.Chansons'],
         ))->firstOrFail();
         
-        $title = $film->titre;
+        $this->set('title', $film->titre);
         
-        $this->set(compact('film', 'title'));
+        $this->set(compact('film'));
     }
 
     /**
@@ -54,7 +56,15 @@ class FilmsController extends AppController
     {
         $film = $this->Films->newEmptyEntity();
         if ($this->request->is('post')) {
-            $film = $this->Films->patchEntity($film, $this->request->getData());
+            $date = date("Y-m-d H:i:s");
+            $data = $this->request->getData();
+            $data['creation'] = $date;
+            $data['modification'] = $date;
+            $data['createur_id'] = 1;
+            $data['modificateur_id'] = 1;
+            $data['slug'] = $this->createSlug($data['titre']);
+            
+            $film = $this->Films->patchEntity($film, $data);
             if ($this->Films->save($film)) {
                 $this->Flash->success(__('The film has been saved.'));
 
@@ -62,8 +72,9 @@ class FilmsController extends AppController
             }
             $this->Flash->error(__('The film could not be saved. Please, try again.'));
         }
-        $utilisateurs = $this->Films->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('film', 'utilisateurs'));
+        
+        $this->set('title', __('Add a film'));
+        $this->set(compact('film'));
     }
 
     /**

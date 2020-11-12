@@ -22,3 +22,28 @@ span.center {
 .content {
 	margin-bottom: 15px;
 }
+
+.row.line {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-3 {
+	width: 25%;
+	padding: 0 15px;
+	margin-bottom: 15px;
+	text-align: center;
+    flex: 0 0 25%;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+span.select2-selection.select2-selection--single,
+span.select2-selection__arrow {
+    height: 3.8rem!important;
+    line-height: 3.8rem;
+}
+
+span#select2-chanson-id-container {
+    height: 3.8rem;
+    line-height: 3.8rem;
+}

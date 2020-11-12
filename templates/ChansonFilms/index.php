@@ -24,8 +24,8 @@
                 <?php foreach ($chansonFilms as $chansonFilm): ?>
                 <tr>
                     <td><?= $this->Number->format($chansonFilm->id) ?></td>
-                    <td><?= $chansonFilm->has('chanson') ? $this->Html->link($chansonFilm->chanson->id, ['controller' => 'Chansons', 'action' => 'view', $chansonFilm->chanson->id]) : '' ?></td>
-                    <td><?= $chansonFilm->has('film') ? $this->Html->link($chansonFilm->film->id, ['controller' => 'Films', 'action' => 'view', $chansonFilm->film->id]) : '' ?></td>
+                    <td><?= $chansonFilm->has('chanson') ? $this->Html->link($chansonFilm->chanson->titre, ['controller' => 'Chansons', 'action' => 'view', $chansonFilm->chanson->slug]) : '' ?></td>
+                    <td><?= $chansonFilm->has('film') ? $this->Html->link($chansonFilm->film->titre, ['controller' => 'Films', 'action' => 'view', $chansonFilm->film->slug]) : '' ?></td>
                     <td><?= h($chansonFilm->scene) ?></td>
                     <td><?= h($chansonFilm->creation) ?></td>
                     <td><?= h($chansonFilm->modification) ?></td>
@@ -41,11 +41,11 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ') ?>
+            <?= $this->Paginator->prev('< ') ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(' >') ?>
+            <?= $this->Paginator->last(' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>

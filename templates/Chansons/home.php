@@ -44,34 +44,36 @@ $this->disableAutoLayout();
             <div class="content">
                 <div class="row">
                     <div class="column">
-                        <h3><?= __('Lasts song added') ?></h3>
-                        <ul>
-                        	<?php foreach ($chansons as $chanson): ?>
-                        		<li><?= h($chanson->titre) ?></li>
-                        	<?php endforeach; ?>
-                        </ul>
+                    	<h3><?= __('Last song added') ?></h3>
                     </div>
+                </div>
+                <div class="row line">
+                	<?php foreach ($chansons as $chanson): ?>
+                		<div class="col-3">
+                			<?= urldecode($this->Html->link($chanson->titre, ['action' => 'view', $chanson->slug, 'controller' => 'Chansons'])) ?>
+                		</div>
+                	<?php endforeach; ?>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="column">
                         <h3><?= __('Elements') ?></h3>
                         <ul>
-                        <li class=""><?= $this->Html->link(__('Songs'), ['action' => 'index', 'controller' => 'Chansons']) ?></li>
+                        <li><?= $this->Html->link(__('Songs'), ['action' => 'index', 'controller' => 'Chansons']) ?></li>
                         </ul>
                     </div>
                     <div class="column">
                         <h3 style="color: white;"><?= __('Elements') ?></h3>
                         <ul>
-                        <li class=""><?= $this->Html->link(__('Films'), ['action' => 'index', 'controller' => 'Films']) ?></li>
-                        <li class=""><?= $this->Html->link(__('Shows'), ['action' => 'index', 'controller' => 'Shows']) ?></li>
+                        <li><?= $this->Html->link(__('Films'), ['action' => 'index', 'controller' => 'Films']) ?></li>
+                        <li><?= $this->Html->link(__('Shows'), ['action' => 'index', 'controller' => 'Shows']) ?></li>
                         </ul>
                     </div>
                     <div class="column">
                         <h3 style="color: white;"><?= __('Elements') ?></h3>
                         <ul>
-                        <li class=""><?= $this->Html->link(__('Translations'), ['action' => 'index', 'controller' => 'Traductions']) ?></li>
-                        <li class=""><?= $this->Html->link(__('Users'), ['action' => 'index', 'controller' => 'Utilisateurs']) ?></li>
+                        <li><?= $this->Html->link(__('Translations'), ['action' => 'index', 'controller' => 'Traductions']) ?></li>
+                        <li><?= $this->Html->link(__('Users'), ['action' => 'index', 'controller' => 'Utilisateurs']) ?></li>
                         </ul>
                     </div>
                 </div>

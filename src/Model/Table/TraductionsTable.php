@@ -13,8 +13,8 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\ChansonsTable&\Cake\ORM\Association\BelongsTo $Chansons
  * @property \App\Model\Table\LanguesTable&\Cake\ORM\Association\BelongsTo $Langues
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Createurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Modificateurs
  *
  * @method \App\Model\Entity\Traduction newEmptyEntity()
  * @method \App\Model\Entity\Traduction newEntity(array $data, array $options = [])
@@ -109,8 +109,8 @@ class TraductionsTable extends Table
     {
         $rules->add($rules->existsIn(['chanson_id'], 'Chansons'), ['errorField' => 'chanson_id']);
         $rules->add($rules->existsIn(['langue_id'], 'Langues'), ['errorField' => 'langue_id']);
-        $rules->add($rules->existsIn(['createur_id'], 'Utilisateurs'), ['errorField' => 'createur_id']);
-        $rules->add($rules->existsIn(['modificateur_id'], 'Utilisateurs'), ['errorField' => 'modificateur_id']);
+        $rules->add($rules->existsIn(['createur_id'], 'Createurs'), ['errorField' => 'createur_id']);
+        $rules->add($rules->existsIn(['modificateur_id'], 'Modificateurs'), ['errorField' => 'modificateur_id']);
 
         return $rules;
     }

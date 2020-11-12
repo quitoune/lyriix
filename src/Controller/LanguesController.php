@@ -19,6 +19,8 @@ class LanguesController extends AppController
     public function index()
     {
         $langues = $this->paginate($this->Langues);
+        
+        $this->set('title', __('Languages'));
 
         $this->set(compact('langues'));
     }
@@ -36,9 +38,10 @@ class LanguesController extends AppController
             'conditions' => array('code' => $code),
             'contain' => ['Traductions', 'Traductions.Chansons'],
         ))->firstOrFail();
-
-        $title = $langue->code;
-        $this->set(compact('langue', 'title'));
+        
+        $this->set('title', $langue->code);
+        
+        $this->set(compact('langue'));
     }
 
     /**

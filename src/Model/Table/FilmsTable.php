@@ -11,8 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Films Model
  *
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Createurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Modificateurs
  * @property \App\Model\Table\ChansonFilmsTable&\Cake\ORM\Association\HasMany $ChansonFilms
  *
  * @method \App\Model\Entity\Film newEmptyEntity()
@@ -115,8 +115,8 @@ class FilmsTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['slug']), ['errorField' => 'slug']);
-        $rules->add($rules->existsIn(['createur_id'], 'Utilisateurs'), ['errorField' => 'createur_id']);
-        $rules->add($rules->existsIn(['modificateur_id'], 'Utilisateurs'), ['errorField' => 'modificateur_id']);
+        $rules->add($rules->existsIn(['createur_id'], 'Createurs'), ['errorField' => 'createur_id']);
+        $rules->add($rules->existsIn(['modificateur_id'], 'Modificateurs'), ['errorField' => 'modificateur_id']);
 
         return $rules;
     }

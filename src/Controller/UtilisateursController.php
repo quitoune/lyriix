@@ -19,6 +19,8 @@ class UtilisateursController extends AppController
     public function index()
     {
         $utilisateurs = $this->paginate($this->Utilisateurs);
+        
+        $this->set('title', __('Users'));
 
         $this->set(compact('utilisateurs'));
     }
@@ -33,6 +35,8 @@ class UtilisateursController extends AppController
     public function view($id = null)
     {
         $utilisateur = $this->Utilisateurs->get($id);
+        
+        $this->set('title', $utilisateur->pseudo);
 
         $this->set(compact('utilisateur'));
     }

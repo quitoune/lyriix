@@ -23,8 +23,8 @@
                 <?php foreach ($chansonShows as $chansonShow): ?>
                 <tr>
                     <td><?= $this->Number->format($chansonShow->id) ?></td>
-                    <td><?= $chansonShow->has('chanson') ? $this->Html->link($chansonShow->chanson->id, ['controller' => 'Chansons', 'action' => 'view', $chansonShow->chanson->id]) : '' ?></td>
-                    <td><?= $chansonShow->has('show') ? $this->Html->link($chansonShow->show->id, ['controller' => 'Shows', 'action' => 'view', $chansonShow->show->id]) : '' ?></td>
+                    <td><?= $chansonShow->has('chanson') ? $this->Html->link($chansonShow->chanson->titre, ['controller' => 'Chansons', 'action' => 'view', $chansonShow->chanson->slug]) : '' ?></td>
+                    <td><?= $chansonShow->has('show') ? $this->Html->link($chansonShow->show->titre, ['controller' => 'Shows', 'action' => 'view', $chansonShow->show->slug]) : '' ?></td>
                     <td><?= h($chansonShow->episode) ?></td>
                     <td><?= h($chansonShow->scene) ?></td>
                     <td class="actions">
@@ -39,11 +39,11 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ') ?>
+            <?= $this->Paginator->prev('< ') ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(' >') ?>
+            <?= $this->Paginator->last(' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>

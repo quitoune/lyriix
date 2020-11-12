@@ -22,6 +22,8 @@ class ChansonFilmsController extends AppController
             'contain' => ['Chansons', 'Films', 'Createurs', 'Modificateurs'],
         ];
         $chansonFilms = $this->paginate($this->ChansonFilms);
+        
+        $this->set('title', __('Song-Film'));
 
         $this->set(compact('chansonFilms'));
     }
@@ -38,6 +40,8 @@ class ChansonFilmsController extends AppController
         $chansonFilm = $this->ChansonFilms->get($id, [
             'contain' => ['Chansons', 'Films', 'Createurs', 'Modificateurs'],
         ]);
+        
+        $this->set('title', __('Song-Film'));
 
         $this->set(compact('chansonFilm'));
     }
@@ -69,7 +73,14 @@ class ChansonFilmsController extends AppController
     {
         $chansonFilm = $this->ChansonFilms->newEmptyEntity();
         if ($this->request->is('post')) {
-            $chansonFilm = $this->ChansonFilms->patchEntity($chansonFilm, $this->request->getData());
+            $date = date("Y-m-d H:i:s");
+            $data = $this->request->getData();
+            $data['creation'] = $date;
+            $data['modification'] = $date;
+            $data['createur_id'] = 1;
+            $data['modificateur_id'] = 1;
+            
+            $chansonFilm = $this->ChansonFilms->patchEntity($chansonFilm, $data);
             if ($this->ChansonFilms->save($chansonFilm)) {
                 $this->Flash->success(__('The chanson film has been saved.'));
 
@@ -77,10 +88,19 @@ class ChansonFilmsController extends AppController
             }
             $this->Flash->error(__('The chanson film could not be saved. Please, try again.'));
         }
-        $chansons = $this->ChansonFilms->Chansons->find('list', ['limit' => 200]);
-        $films = $this->ChansonFilms->Films->find('list', ['limit' => 200]);
-        $utilisateurs = $this->ChansonFilms->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('chansonFilm', 'chansons', 'films', 'utilisateurs'));
+        $chansons = $this->ChansonFilms->Chansons->find('threaded', array(
+            'contain' => ['ChansonFilms.Chansons'],
+            'limit' => 200,
+            'order' => array('titre' => 'ASC')
+        ));
+        $films = $this->ChansonFilms->Films->find('threaded', array(
+            'contain' => ['ChansonFilms.Films'],
+            'limit' => 200,
+            'order' => array('titre' => 'ASC')
+        ));
+        
+        $this->set('title', __('Add Song-Film'));
+        $this->set(compact('chansonFilm', 'chansons', 'films'));
     }
 
     /**

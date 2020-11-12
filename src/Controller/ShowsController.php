@@ -22,6 +22,8 @@ class ShowsController extends AppController
             'contain' => ['Createurs', 'Modificateurs'],
         ];
         $shows = $this->paginate($this->Shows);
+        
+        $this->set('title', __('Shows'));
 
         $this->set(compact('shows'));
     }
@@ -40,9 +42,10 @@ class ShowsController extends AppController
             'contain' => ['Createurs', 'Modificateurs', 'ChansonShows'],
         ))->firstOrFail();
         
-        $title = $show->titre;
         
-        $this->set(compact('show', 'title'));
+        $this->set('title', $show->titre);
+        
+        $this->set(compact('show'));
     }
 
     /**
@@ -54,7 +57,15 @@ class ShowsController extends AppController
     {
         $show = $this->Shows->newEmptyEntity();
         if ($this->request->is('post')) {
-            $show = $this->Shows->patchEntity($show, $this->request->getData());
+            $date = date("Y-m-d H:i:s");
+            $data = $this->request->getData();
+            $data['creation'] = $date;
+            $data['modification'] = $date;
+            $data['createur_id'] = 1;
+            $data['modificateur_id'] = 1;
+            $data['slug'] = $this->createSlug($data['titre']);
+            
+            $show = $this->Shows->patchEntity($show, $data);
             if ($this->Shows->save($show)) {
                 $this->Flash->success(__('The show has been saved.'));
 
@@ -62,8 +73,9 @@ class ShowsController extends AppController
             }
             $this->Flash->error(__('The show could not be saved. Please, try again.'));
         }
-        $utilisateurs = $this->Shows->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('show', 'utilisateurs'));
+        
+        $this->set('title', __('Add a show'));
+        $this->set(compact('show'));
     }
 
     /**

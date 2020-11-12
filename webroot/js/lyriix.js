@@ -23,3 +23,7 @@ function Ajax(url, id_done, method){
         $(id_done).html(html);
     });
 }
+
+$(document).ready(function(){
+	$("select").select2();
+});

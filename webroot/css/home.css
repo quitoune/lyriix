@@ -13,9 +13,6 @@
 body {
     padding: 60px 0;
 }
-header {
-    margin-bottom: 60px;
-}
 img {
     margin-bottom: 30px;
 }
@@ -28,8 +25,8 @@ ul {
     padding-left: 25px;
 }
 a {
-    color: #0071BC;
-    text-decoration: underline;
+    color: #606c76;
+    text-decoration: none;
 }
 hr {
     border-bottom: 1px solid #e7e7e7;

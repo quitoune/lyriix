@@ -50,4 +50,20 @@ class AppController extends Controller
          */
         //$this->loadComponent('FormProtection');
     }
+    
+    public function createSlug(string $title): string
+    {
+        $slug = htmlentities($title, ENT_NOQUOTES, "utf-8" );
+        
+        $slug = preg_replace('#&([A-za-z])(?:acute|cedil|caron|circ|grave|orn|ring|slash|th|tilde|uml);#', '\1', $slug);
+        $slug = preg_replace('#&([A-za-z]{2})(?:lig);#', '\1', $slug);
+        $slug = preg_replace('#&[^;]+;#', '', $slug);
+        
+        $slug = str_replace(array("/", "\\", "'"), '-', $slug);
+        $slug = str_replace(array("?", ",", "(", ")", ":", "[", "]", '"'), '', $slug);
+        $slug = trim($slug);
+        $slug = implode("_", explode(' ', $slug));
+        
+        return $slug;
+    }
 }

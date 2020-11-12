@@ -12,6 +12,22 @@ namespace App\Controller;
 class ChansonsController extends AppController
 {
     /**
+    * Home method
+    *
+    * @return \Cake\Http\Response|null|void Renders view
+    */
+    public function home()
+    {
+        $chansons = $this->Chansons->find('threaded', array(
+            'conditions' => array('Chansons.creation >= ' => date("Y-m-d H:i:s", strtotime("-7 days"))),
+        ));
+        
+        $this->set('title', __('Home'));
+        
+        $this->set(compact('chansons'));
+    }
+    
+    /**
      * Index method
      *
      * @return \Cake\Http\Response|null|void Renders view
@@ -22,7 +38,9 @@ class ChansonsController extends AppController
             'contain' => ['Createurs', 'Modificateurs'],
         ];
         $chansons = $this->paginate($this->Chansons);
-
+        
+        $this->set('title', __('Songs'));
+        
         $this->set(compact('chansons'));
     }
 
@@ -40,9 +58,9 @@ class ChansonsController extends AppController
             'contain' => ['Createurs', 'ChansonFilms', 'ChansonFilms.Films', 'ChansonShows', 'ChansonShows.Shows', 'Modificateurs', 'Traductions', 'Traductions.Langues'],
         ))->firstOrFail();
         
-        $title = $chanson->titre;
+        $this->set('title', $chanson->titre);
         
-        $this->set(compact('chanson', 'title'));
+        $this->set(compact('chanson'));
     }
 
     /**
@@ -54,7 +72,15 @@ class ChansonsController extends AppController
     {
         $chanson = $this->Chansons->newEmptyEntity();
         if ($this->request->is('post')) {
-            $chanson = $this->Chansons->patchEntity($chanson, $this->request->getData());
+            $date = date("Y-m-d H:i:s");
+            $data = $this->request->getData();
+            $data['creation'] = $date;
+            $data['modification'] = $date;
+            $data['createur_id'] = 1;
+            $data['modificateur_id'] = 1;
+            $data['slug'] = $this->createSlug($data['titre']);
+            
+            $chanson = $this->Chansons->patchEntity($chanson, $data);
             if ($this->Chansons->save($chanson)) {
                 $this->Flash->success(__('The chanson has been saved.'));
 
@@ -62,8 +88,9 @@ class ChansonsController extends AppController
             }
             $this->Flash->error(__('The chanson could not be saved. Please, try again.'));
         }
-        $utilisateurs = $this->Chansons->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('chanson', 'utilisateurs'));
+        
+        $this->set('title', __('Add a song'));
+        $this->set(compact('chanson'));
     }
 
     /**

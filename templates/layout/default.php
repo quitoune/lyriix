@@ -21,18 +21,12 @@
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        <?php if (isset($title)): ?>
         <?= $title ?>
-        <?php else: ?>
-        <?= $this->fetch('title') ?>
-        <?php endif; ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake', 'lyriix', 'palette']) ?>
-    <?= $this->Html->script(['jquery-3.3.1.min', 'lyriix']) ?>
+    <?= $this->Html->css(['family', 'normalize.min', 'milligram.min', 'cake', 'select2.min', 'lyriix', 'palette']) ?>
+    <?= $this->Html->script(['jquery-3.3.1.min', 'select2.full.min', 'lyriix']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -41,7 +35,7 @@
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
+            <a href="<?= $this->Url->build('/') ?>"><span>Ly</span>riix</a>
         </div>
         <div class="top-nav-links">
             <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>

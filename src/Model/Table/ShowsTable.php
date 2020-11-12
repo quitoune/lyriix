@@ -11,8 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Shows Model
  *
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Createurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Modificateurs
  * @property \App\Model\Table\ChansonShowsTable&\Cake\ORM\Association\HasMany $ChansonShows
  *
  * @method \App\Model\Entity\Show newEmptyEntity()
@@ -109,8 +109,8 @@ class ShowsTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['slug']), ['errorField' => 'slug']);
-        $rules->add($rules->existsIn(['createur_id'], 'Utilisateurs'), ['errorField' => 'createur_id']);
-        $rules->add($rules->existsIn(['modificateur_id'], 'Utilisateurs'), ['errorField' => 'modificateur_id']);
+        $rules->add($rules->existsIn(['createur_id'], 'Createurs'), ['errorField' => 'createur_id']);
+        $rules->add($rules->existsIn(['modificateur_id'], 'Modificateurs'), ['errorField' => 'modificateur_id']);
 
         return $rules;
     }

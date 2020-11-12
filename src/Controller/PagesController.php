@@ -59,6 +59,7 @@ class PagesController extends AppController
         if (!empty($path[1])) {
             $subpage = $path[1];
         }
+        
         $this->set(compact('page', 'subpage'));
 
         try {
@@ -69,5 +70,21 @@ class PagesController extends AppController
             }
             throw new NotFoundException();
         }
+    }
+    
+    /**
+     * Home method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function home()
+    {
+        $chansons = $this->Chansons->find('threaded', array(
+            'conditions' => array('Chansons.creation >= ' => date("Y-m-d H:i:s", strtotime("-7 days"))),
+        ));
+        
+        $this->set('title', __('Home'));
+        
+        $this->set(compact('chansons'));
     }
 }

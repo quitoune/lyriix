@@ -58,7 +58,7 @@
                         <?php foreach ($chanson->chanson_films as $chansonFilm) : ?>
                         <tr>
                             <td><?= h($chansonFilm->id) ?></td>
-                            <td><?= h($chansonFilm->film->titre) ?></td>
+                            <td><?= $this->Html->link(h($chansonFilm->film->titre), ['action' => 'view', $chansonFilm->film->slug, 'controller' => 'Films']) ?></td>
                             <td><?= h($chansonFilm->scene) ?></td>
                         </tr>
                         <?php endforeach; ?>
@@ -82,7 +82,7 @@
                         <?php foreach ($chanson->chanson_shows as $chansonShow) : ?>
                         <tr>
                             <td><?= h($chansonShow->id) ?></td>
-                            <td><?= h($chansonShow->show->titre) ?></td>
+                            <td><?= $this->Html->link(h($chansonShow->show->titre), ['action' => 'view', $chansonShow->show->slug, 'controller' => 'Shows']) ?></td>
                             <td><?= h($chansonShow->episode) ?></td>
                             <td><?= h($chansonShow->scene) ?></td>
                         </tr>

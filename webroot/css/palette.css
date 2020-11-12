@@ -5,3 +5,12 @@
 h1, h2, h3, h4, h5, h6 {
     color: #db6268;
 }
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: #db6268;
+}
+
+.select2-container--default .select2-results__option--selected {
+    background-color: #e99da1;
+    color: white;
+}

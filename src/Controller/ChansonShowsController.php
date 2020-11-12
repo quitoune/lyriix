@@ -22,6 +22,8 @@ class ChansonShowsController extends AppController
             'contain' => ['Chansons', 'Shows', 'Createurs', 'Modificateurs'],
         ];
         $chansonShows = $this->paginate($this->ChansonShows);
+        
+        $this->set('title', __('Song-Show'));
 
         $this->set(compact('chansonShows'));
     }
@@ -38,6 +40,8 @@ class ChansonShowsController extends AppController
         $chansonShow = $this->ChansonShows->get($id, [
             'contain' => ['Chansons', 'Shows', 'Createurs', 'Modificateurs'],
         ]);
+        
+        $this->set('title', __('Song-Show'));
 
         $this->set(compact('chansonShow'));
     }
@@ -57,6 +61,8 @@ class ChansonShowsController extends AppController
             'order' => ['episode' => 'ASC']
         ));
         
+        $this->set('title', __('Song-Show'));
+        
         $this->set(compact('chansonShows'));
     }
 
@@ -69,7 +75,15 @@ class ChansonShowsController extends AppController
     {
         $chansonShow = $this->ChansonShows->newEmptyEntity();
         if ($this->request->is('post')) {
-            $chansonShow = $this->ChansonShows->patchEntity($chansonShow, $this->request->getData());
+            $date = date("Y-m-d H:i:s");
+            $data = $this->request->getData();
+            $data['creation'] = $date;
+            $data['modification'] = $date;
+            $data['createur_id'] = 1;
+            $data['modificateur_id'] = 1;
+            $data['episode'] = "S" . intval($data['saison']). "E" . (intval($data["episode"]) < 10 ? "0" . intval($data["episode"]) : intval($data["episode"]));
+            
+            $chansonShow = $this->ChansonShows->patchEntity($chansonShow, $data);
             if ($this->ChansonShows->save($chansonShow)) {
                 $this->Flash->success(__('The chanson show has been saved.'));
 
@@ -77,10 +91,19 @@ class ChansonShowsController extends AppController
             }
             $this->Flash->error(__('The chanson show could not be saved. Please, try again.'));
         }
-        $chansons = $this->ChansonShows->Chansons->find('list', ['limit' => 200]);
-        $shows = $this->ChansonShows->Shows->find('list', ['limit' => 200]);
-        $utilisateurs = $this->ChansonShows->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('chansonShow', 'chansons', 'shows', 'utilisateurs'));
+        $chansons = $this->ChansonShows->Chansons->find('threaded', array(
+            'contain' => ['ChansonShows.Chansons'],
+            'limit' => 200,
+            'order' => array('titre' => 'ASC')
+        ));
+        $shows = $this->ChansonShows->Shows->find('threaded', array(
+            'contain' => ['ChansonShows.Shows'],
+            'limit' => 200,
+            'order' => array('titre' => 'ASC')
+        ));
+        
+        $this->set('title', __('Add Song-Show'));
+        $this->set(compact('chansonShow', 'chansons', 'shows'));
     }
 
     /**

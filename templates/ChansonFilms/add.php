@@ -2,6 +2,8 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\ChansonFilm $chansonFilm
+ * @var \App\Model\Entity\Chanson $chansons
+ * @var \App\Model\Entity\Film $films
  */
 ?>
 <div class="row">
@@ -17,11 +19,17 @@
             <fieldset>
                 <legend><?= __('Add Chanson Film') ?></legend>
                 <?php
-                    echo $this->Form->control('chanson_id', ['options' => $chansons]);
-                    echo $this->Form->control('film_id', ['options' => $films]);
+                    $opt_song = array();
+                    foreach ($chansons as $chanson){
+                        $opt_song[$chanson->id] = $chanson->titre;
+                    }
+                    $opt_film = array();
+                    foreach ($films as $film){
+                        $opt_film[$film->id] = $film->titre;
+                    }
+                    echo $this->Form->control('chanson_id', ['options' => $opt_song]);
+                    echo $this->Form->control('film_id', ['options' => $opt_film]);
                     echo $this->Form->control('scene');
-                    echo $this->Form->control('creation', ['empty' => true]);
-                    echo $this->Form->control('modification', ['empty' => true]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

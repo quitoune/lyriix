@@ -2,6 +2,8 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Traduction $traduction
+ * @var \App\Model\Entity\Traduction $chansons
+ * @var \App\Model\Entity\Traduction $langues
  */
 ?>
 <div class="row">
@@ -17,11 +19,17 @@
             <fieldset>
                 <legend><?= __('Add Traduction') ?></legend>
                 <?php
-                    echo $this->Form->control('chanson_id', ['options' => $chansons]);
-                    echo $this->Form->control('langue_id', ['options' => $langues]);
+                    $opt_song = array();
+                    foreach ($chansons as $chanson){
+                        $opt_song[$chanson->id] = $chanson->titre;
+                    }
+                    $opt_lang = array();
+                    foreach ($langues as $langue){
+                        $opt_lang[$langue->id] = $langue->nom;
+                    }
+                    echo $this->Form->control('chanson_id', ['options' => $opt_song]);
+                    echo $this->Form->control('langue_id', ['options' => $opt_lang]);
                     echo $this->Form->control('texte');
-                    echo $this->Form->control('creation', ['empty' => true]);
-                    echo $this->Form->control('modification', ['empty' => true]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

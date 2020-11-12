@@ -13,8 +13,8 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\ChansonsTable&\Cake\ORM\Association\BelongsTo $Chansons
  * @property \App\Model\Table\FilmsTable&\Cake\ORM\Association\BelongsTo $Films
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Createurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Modificateurs
  *
  * @method \App\Model\Entity\ChansonFilm newEmptyEntity()
  * @method \App\Model\Entity\ChansonFilm newEntity(array $data, array $options = [])
@@ -103,8 +103,8 @@ class ChansonFilmsTable extends Table
     {
         $rules->add($rules->existsIn(['chanson_id'], 'Chansons'), ['errorField' => 'chanson_id']);
         $rules->add($rules->existsIn(['film_id'], 'Films'), ['errorField' => 'film_id']);
-        $rules->add($rules->existsIn(['createur_id'], 'Utilisateurs'), ['errorField' => 'createur_id']);
-        $rules->add($rules->existsIn(['modificateur_id'], 'Utilisateurs'), ['errorField' => 'modificateur_id']);
+        $rules->add($rules->existsIn(['createur_id'], 'Createurs'), ['errorField' => 'createur_id']);
+        $rules->add($rules->existsIn(['modificateur_id'], 'Modificateurs'), ['errorField' => 'modificateur_id']);
 
         return $rules;
     }

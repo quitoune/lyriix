@@ -11,8 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Chansons Model
  *
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Utilisateurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Createurs
+ * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Modificateurs
  * @property \App\Model\Table\ChansonFilmsTable&\Cake\ORM\Association\HasMany $ChansonFilms
  * @property \App\Model\Table\ChansonShowsTable&\Cake\ORM\Association\HasMany $ChansonShows
  * @property \App\Model\Table\TraductionsTable&\Cake\ORM\Association\HasMany $Traductions
@@ -127,8 +127,8 @@ class ChansonsTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['slug']), ['errorField' => 'slug']);
-        $rules->add($rules->existsIn(['createur_id'], 'Utilisateurs'), ['errorField' => 'createur_id']);
-        $rules->add($rules->existsIn(['modificateur_id'], 'Utilisateurs'), ['errorField' => 'modificateur_id']);
+        $rules->add($rules->existsIn(['createur_id'], 'Createurs'), ['errorField' => 'createur_id']);
+        $rules->add($rules->existsIn(['modificateur_id'], 'Modificateurs'), ['errorField' => 'modificateur_id']);
 
         return $rules;
     }
