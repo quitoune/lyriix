@@ -35,8 +35,8 @@
                     <td><?= h($chansonShow->scene) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Utilisateur') ?></th>
-                    <td><?= $chansonShow->has('utilisateur') ? $this->Html->link($chansonShow->utilisateur->id, ['controller' => 'Utilisateurs', 'action' => 'view', $chansonShow->utilisateur->id]) : '' ?></td>
+                    <th><?= __('User') ?></th>
+                    <td><?= $chansonShow->has('user') ? $this->Html->link($chansonShow->user->id, ['controller' => 'Users', 'action' => 'view', $chansonShow->user->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

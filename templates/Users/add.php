@@ -1,26 +1,21 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Utilisateur $utilisateur
+ * @var \App\Model\Entity\User $user
  */
 ?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $utilisateur->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $utilisateur->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Utilisateurs'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
-        <div class="utilisateurs form content">
-            <?= $this->Form->create($utilisateur) ?>
+        <div class="users form content">
+            <?= $this->Form->create($user) ?>
             <fieldset>
-                <legend><?= __('Edit Utilisateur') ?></legend>
+                <legend><?= __('Add User') ?></legend>
                 <?php
                     echo $this->Form->control('pseudo');
                     echo $this->Form->control('email');

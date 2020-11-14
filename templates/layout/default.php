@@ -38,8 +38,7 @@
             <a href="<?= $this->Url->build('/') ?>"><span>Ly</span>riix</a>
         </div>
         <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+            <?= $this->Html->link(__('Login'), ['action' => 'login', 'controller' => 'Users']) ?>
         </div>
     </nav>
     <main class="main">

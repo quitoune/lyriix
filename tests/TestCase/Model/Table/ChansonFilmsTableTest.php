@@ -27,7 +27,7 @@ class ChansonFilmsTableTest extends TestCase
         'app.ChansonFilms',
         'app.Chansons',
         'app.Films',
-        'app.Utilisateurs',
+        'app.Users',
     ];
 
     /**

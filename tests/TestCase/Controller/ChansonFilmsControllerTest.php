@@ -25,7 +25,7 @@ class ChansonFilmsControllerTest extends TestCase
         'app.ChansonFilms',
         'app.Chansons',
         'app.Films',
-        'app.Utilisateurs',
+        'app.Users',
     ];
 
     /**

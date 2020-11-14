@@ -99,8 +99,8 @@ class ShowsController extends AppController
             }
             $this->Flash->error(__('The show could not be saved. Please, try again.'));
         }
-        $utilisateurs = $this->Shows->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('show', 'utilisateurs'));
+        $users = $this->Shows->Users->find('list', ['limit' => 200]);
+        $this->set(compact('show', 'users'));
     }
 
     /**

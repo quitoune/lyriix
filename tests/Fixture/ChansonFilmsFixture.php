@@ -33,9 +33,9 @@ class ChansonFilmsFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'chanson_film_modificateur' => ['type' => 'foreign', 'columns' => ['modificateur_id'], 'references' => ['utilisateurs', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'chanson_film_modificateur' => ['type' => 'foreign', 'columns' => ['modificateur_id'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
             'chanson_film_film' => ['type' => 'foreign', 'columns' => ['film_id'], 'references' => ['films', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
-            'chanson_film_createur' => ['type' => 'foreign', 'columns' => ['createur_id'], 'references' => ['utilisateurs', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'chanson_film_createur' => ['type' => 'foreign', 'columns' => ['createur_id'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
             'chanson_film_chanson' => ['type' => 'foreign', 'columns' => ['chanson_id'], 'references' => ['chansons', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [

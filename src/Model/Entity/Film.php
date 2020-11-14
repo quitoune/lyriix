@@ -18,8 +18,8 @@ use Cake\ORM\Entity;
  * @property int|null $createur_id
  * @property int|null $modificateur_id
  *
- * @property \App\Model\Entity\Utilisateur $createur
- * @property \App\Model\Entity\Utilisateur $modificateur
+ * @property \App\Model\Entity\User $createur
+ * @property \App\Model\Entity\User $modificateur
  * @property \App\Model\Entity\ChansonFilm[] $chanson_films
  */
 class Film extends Entity

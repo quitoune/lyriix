@@ -35,7 +35,7 @@ class ChansonsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Createurs', 'Modificateurs'],
+            'order' => ['id' => 'DESC']
         ];
         $chansons = $this->paginate($this->Chansons);
         
@@ -72,21 +72,24 @@ class ChansonsController extends AppController
     {
         $chanson = $this->Chansons->newEmptyEntity();
         if ($this->request->is('post')) {
-            $date = date("Y-m-d H:i:s");
-            $data = $this->request->getData();
-            $data['creation'] = $date;
-            $data['modification'] = $date;
-            $data['createur_id'] = 1;
-            $data['modificateur_id'] = 1;
+            $data = $this->preCreationObjet($this->request->getData());
             $data['slug'] = $this->createSlug($data['titre']);
             
-            $chanson = $this->Chansons->patchEntity($chanson, $data);
-            if ($this->Chansons->save($chanson)) {
-                $this->Flash->success(__('The chanson has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            $filename = strtolower($data['slug'] . '-' . $this->createSlug($data['interprete'])) . '.txt';
+            if(!file_exists("resources/chansons/" . $filename)){
+                file_put_contents("resources/chansons/" . $filename, $data['paroles']);
+                $data['paroles'] = $filename;
+                
+                $chanson = $this->Chansons->patchEntity($chanson, $data);
+                if ($this->Chansons->save($chanson)) {
+                    $this->Flash->success(__('The song has been saved.'));
+    
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The song could not be saved. Please, try again.'));
+            } else {
+                $this->Flash->error(__('The song has been already added.'));
             }
-            $this->Flash->error(__('The chanson could not be saved. Please, try again.'));
         }
         
         $this->set('title', __('Add a song'));
@@ -106,7 +109,10 @@ class ChansonsController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $chanson = $this->Chansons->patchEntity($chanson, $this->request->getData());
+            $data = $this->preCreationObjet($this->request->getData());
+            $chanson = $this->Chansons->patchEntity($chanson, $data, [
+                'accessibleFields' => ['createur_id' => false]
+            ]);
             if ($this->Chansons->save($chanson)) {
                 $this->Flash->success(__('The chanson has been saved.'));
 
@@ -114,8 +120,8 @@ class ChansonsController extends AppController
             }
             $this->Flash->error(__('The chanson could not be saved. Please, try again.'));
         }
-        $utilisateurs = $this->Chansons->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('chanson', 'utilisateurs'));
+        $users = $this->Chansons->Users->find('list', ['limit' => 200]);
+        $this->set(compact('chanson', 'users'));
     }
 
     /**
@@ -136,5 +142,23 @@ class ChansonsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        // Les actions 'add' et 'tags' sont toujours autorisés pour les user
+        // authentifiés sur l'application
+        if (in_array($action, ['add', 'edit'])) {
+            return true;
+        }
+        
+        // Toutes les autres actions nécessitent un slug
+        $slug = $this->request->getParam('pass.0');
+        if (!$slug) {
+            return false;
+        }
+        
+        return false;
     }
 }

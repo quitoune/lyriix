@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Controller\Component\AuthComponent;
 
 /**
  * Application Controller
@@ -44,11 +45,29 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 
-        /*
-         * Enable the following component for recommended CakePHP form protection settings.
-         * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
-         */
-        //$this->loadComponent('FormProtection');
+        $this->loadComponent('Auth', [
+            'authorize'=> 'Controller',
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'pseudo',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            // Si pas autorisé, on renvoit sur la page précédente
+            'unauthorizedRedirect' => $this->referer()
+        ]);
+        
+        // Permet à l'action "display" de notre PagesController de continuer
+        // à fonctionner. Autorise également les actions "read-only".
+        $this->Auth->allow(['display', 'view', 'index', 'home', 'add', 'edit', 'delete']);
+        $this->Auth->allow(['addShow', 'showView', 'addFilm', 'showFilm']);
+        $this->Auth->allow(['logout', 'login', 'langueView']);
     }
     
     public function createSlug(string $title): string
@@ -65,5 +84,36 @@ class AppController extends Controller
         $slug = implode("_", explode(' ', $slug));
         
         return $slug;
+    }
+    
+    public function isAuthorized($user)
+    {
+        // Par défaut, on refuse l'accès.
+        return false;
+    }
+    
+    public function updateModification($info): array
+    {
+        $date = date("Y-m-d H:i:s");
+        $data = $info;
+        $data['modification'] = $date;
+        $data['modificateur_id'] = 1;
+//         $data['modificateur_id'] = $this->Auth->user('id');
+        
+        return $data;
+    }
+    
+    public function preCreationObjet($info): array
+    {
+        $date = date("Y-m-d H:i:s");
+        $data = $info;
+        $data['creation'] = $date;
+        $data['modification'] = $date;
+        $data['createur_id'] = 1;
+        $data['modificateur_id'] = 1;
+//         $data['createur_id'] = $this->Auth->user('id');
+//         $data['modificateur_id'] = $this->Auth->user('id');
+        
+        return $data;
     }
 }

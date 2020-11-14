@@ -34,9 +34,9 @@ class TraductionsFixture extends TestFixture
         ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
-            'traduction_modificateur' => ['type' => 'foreign', 'columns' => ['modificateur_id'], 'references' => ['utilisateurs', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'traduction_modificateur' => ['type' => 'foreign', 'columns' => ['modificateur_id'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
             'traduction_langue' => ['type' => 'foreign', 'columns' => ['langue_id'], 'references' => ['langues', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
-            'traduction_createur' => ['type' => 'foreign', 'columns' => ['createur_id'], 'references' => ['utilisateurs', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'traduction_createur' => ['type' => 'foreign', 'columns' => ['createur_id'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
             'traduction_chanson' => ['type' => 'foreign', 'columns' => ['chanson_id'], 'references' => ['chansons', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [

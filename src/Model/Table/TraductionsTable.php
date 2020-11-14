@@ -13,8 +13,8 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\ChansonsTable&\Cake\ORM\Association\BelongsTo $Chansons
  * @property \App\Model\Table\LanguesTable&\Cake\ORM\Association\BelongsTo $Langues
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Createurs
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Modificateurs
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Createurs
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Modificateurs
  *
  * @method \App\Model\Entity\Traduction newEmptyEntity()
  * @method \App\Model\Entity\Traduction newEntity(array $data, array $options = [])
@@ -55,11 +55,11 @@ class TraductionsTable extends Table
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('Createurs', [
-            'className' => 'Utilisateurs',
+            'className' => 'Users',
             'foreignKey' => 'createur_id',
         ]);
         $this->belongsTo('Modificateurs', [
-            'className' => 'Utilisateurs',
+            'className' => 'Users',
             'foreignKey' => 'modificateur_id',
         ]);
     }

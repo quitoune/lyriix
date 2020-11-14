@@ -20,7 +20,7 @@
                     echo $this->Form->control('titre');
                     echo $this->Form->control('interprete');
                     echo $this->Form->control('annee');
-                    echo $this->Form->control('paroles');
+                    echo $this->Form->textarea('paroles', ['maxlength' => '', 'class' => 'paroles']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

@@ -32,8 +32,8 @@ class ShowsFixture extends TestFixture
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
             'slug' => ['type' => 'unique', 'columns' => ['slug'], 'length' => []],
-            'show_modificateur' => ['type' => 'foreign', 'columns' => ['modificateur_id'], 'references' => ['utilisateurs', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
-            'show_createur' => ['type' => 'foreign', 'columns' => ['createur_id'], 'references' => ['utilisateurs', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'show_modificateur' => ['type' => 'foreign', 'columns' => ['modificateur_id'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
+            'show_createur' => ['type' => 'foreign', 'columns' => ['createur_id'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',

@@ -71,7 +71,7 @@ $this->disableAutoLayout();
                         <h3 style="color: white;"><?= __('Elements') ?></h3>
                         <ul>
                         <li class=""><?= $this->Html->link(__('Translations'), ['action' => 'index', 'controller' => 'Traductions']) ?></li>
-                        <li class=""><?= $this->Html->link(__('Users'), ['action' => 'index', 'controller' => 'Utilisateurs']) ?></li>
+                        <li class=""><?= $this->Html->link(__('Users'), ['action' => 'index', 'controller' => 'Users']) ?></li>
                         </ul>
                     </div>
                 </div>

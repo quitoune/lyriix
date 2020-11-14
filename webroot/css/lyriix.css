@@ -47,3 +47,7 @@ span#select2-chanson-id-container {
     height: 3.8rem;
     line-height: 3.8rem;
 }
+
+textarea.paroles {
+	height: 600px;
+}

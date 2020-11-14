@@ -19,7 +19,7 @@ class FilmsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Createurs', 'Modificateurs'],
+            'order' => ['titre' => 'ASC']
         ];
         $films = $this->paginate($this->Films);
         
@@ -98,8 +98,8 @@ class FilmsController extends AppController
             }
             $this->Flash->error(__('The film could not be saved. Please, try again.'));
         }
-        $utilisateurs = $this->Films->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('film', 'utilisateurs'));
+        $users = $this->Films->Users->find('list', ['limit' => 200]);
+        $this->set(compact('film', 'users'));
     }
 
     /**

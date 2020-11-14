@@ -20,8 +20,8 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Chanson $chanson
  * @property \App\Model\Entity\Show $show
- * @property \App\Model\Entity\Utilisateur $createur
- * @property \App\Model\Entity\Utilisateur $modificateur
+ * @property \App\Model\Entity\User $createur
+ * @property \App\Model\Entity\User $modificateur
  */
 class ChansonShow extends Entity
 {

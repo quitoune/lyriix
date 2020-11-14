@@ -11,8 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Films Model
  *
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Createurs
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Modificateurs
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Createurs
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Modificateurs
  * @property \App\Model\Table\ChansonFilmsTable&\Cake\ORM\Association\HasMany $ChansonFilms
  *
  * @method \App\Model\Entity\Film newEmptyEntity()
@@ -46,11 +46,11 @@ class FilmsTable extends Table
         $this->setPrimaryKey('id');
         
         $this->belongsTo('Createurs', [
-            'className' => 'Utilisateurs',
+            'className' => 'Users',
             'foreignKey' => 'createur_id',
         ]);
         $this->belongsTo('Modificateurs', [
-            'className' => 'Utilisateurs',
+            'className' => 'Users',
             'foreignKey' => 'modificateur_id',
         ]);
         $this->hasMany('ChansonFilms', [

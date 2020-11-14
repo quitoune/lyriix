@@ -20,8 +20,8 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Chanson $chanson
  * @property \App\Model\Entity\Langue $langue
- * @property \App\Model\Entity\Utilisateur $createur
- * @property \App\Model\Entity\Utilisateur $modificateur
+ * @property \App\Model\Entity\User $createur
+ * @property \App\Model\Entity\User $modificateur
  */
 class Traduction extends Entity
 {

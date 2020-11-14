@@ -11,8 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Shows Model
  *
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Createurs
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Modificateurs
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Createurs
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Modificateurs
  * @property \App\Model\Table\ChansonShowsTable&\Cake\ORM\Association\HasMany $ChansonShows
  *
  * @method \App\Model\Entity\Show newEmptyEntity()
@@ -46,11 +46,11 @@ class ShowsTable extends Table
         $this->setPrimaryKey('id');
         
         $this->belongsTo('Createurs', [
-            'className' => 'Utilisateurs',
+            'className' => 'Users',
             'foreignKey' => 'createur_id',
         ]);
         $this->belongsTo('Modificateurs', [
-            'className' => 'Utilisateurs',
+            'className' => 'Users',
             'foreignKey' => 'modificateur_id',
         ]);
         $this->hasMany('ChansonShows', [

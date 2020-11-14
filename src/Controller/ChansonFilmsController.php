@@ -102,6 +102,41 @@ class ChansonFilmsController extends AppController
         $this->set('title', __('Add Song-Film'));
         $this->set(compact('chansonFilm', 'chansons', 'films'));
     }
+    
+    /**
+     * Add method
+     *
+     * @param string|null $slug Chanson slug.
+     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
+     */
+    public function addFilm($slug = null)
+    {
+        $chansonFilm = $this->ChansonFilms->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $data = $this->preCreationObjet($this->request->getData());
+            
+            $chansonFilm = $this->ChansonFilms->patchEntity($chansonFilm, $data);
+            if ($this->ChansonFilms->save($chansonFilm)) {
+                $this->Flash->success(__('The chanson film has been saved.'));
+                
+                return $this->redirect(['action' => 'view', $slug, 'controller' => 'Chansons']);
+            }
+            $this->Flash->error(__('The chanson film could not be saved. Please, try again.'));
+        }
+        $chanson = $this->ChansonFilms->Chansons->find('threaded', array(
+            'contain' => ['ChansonFilms.Chansons'],
+            'conditions' => ['slug' => $slug]
+        ))->firstOrFail();
+        
+        $films = $this->ChansonFilms->Films->find('threaded', array(
+            'contain' => ['ChansonFilms.Films'],
+            'limit' => 200,
+            'order' => array('titre' => 'ASC')
+        ));
+        
+        $this->set('title', __('Add Song-Film'));
+        $this->set(compact('chansonFilm', 'chanson', 'films'));
+    }
 
     /**
      * Edit method
@@ -126,8 +161,8 @@ class ChansonFilmsController extends AppController
         }
         $chansons = $this->ChansonFilms->Chansons->find('list', ['limit' => 200]);
         $films = $this->ChansonFilms->Films->find('list', ['limit' => 200]);
-        $utilisateurs = $this->ChansonFilms->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('chansonFilm', 'chansons', 'films', 'utilisateurs'));
+        $users = $this->ChansonFilms->Users->find('list', ['limit' => 200]);
+        $this->set(compact('chansonFilm', 'chansons', 'films', 'users'));
     }
 
     /**

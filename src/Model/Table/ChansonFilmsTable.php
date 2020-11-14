@@ -13,8 +13,8 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\ChansonsTable&\Cake\ORM\Association\BelongsTo $Chansons
  * @property \App\Model\Table\FilmsTable&\Cake\ORM\Association\BelongsTo $Films
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Createurs
- * @property \App\Model\Table\UtilisateursTable&\Cake\ORM\Association\BelongsTo $Modificateurs
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Createurs
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Modificateurs
  *
  * @method \App\Model\Entity\ChansonFilm newEmptyEntity()
  * @method \App\Model\Entity\ChansonFilm newEntity(array $data, array $options = [])
@@ -55,11 +55,11 @@ class ChansonFilmsTable extends Table
             'joinType' => 'INNER',
         ]);
         $this->belongsTo('Createurs', [
-            'className' => 'Utilisateurs',
+            'className' => 'Users',
             'foreignKey' => 'createur_id',
         ]);
         $this->belongsTo('Modificateurs', [
-            'className' => 'Utilisateurs',
+            'className' => 'Users',
             'foreignKey' => 'modificateur_id',
         ]);
     }

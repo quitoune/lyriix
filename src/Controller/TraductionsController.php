@@ -125,8 +125,8 @@ class TraductionsController extends AppController
         }
         $chansons = $this->Traductions->Chansons->find('list', ['limit' => 200]);
         $langues = $this->Traductions->Langues->find('list', ['limit' => 200]);
-        $utilisateurs = $this->Traductions->Utilisateurs->find('list', ['limit' => 200]);
-        $this->set(compact('traduction', 'chansons', 'langues', 'utilisateurs'));
+        $users = $this->Traductions->Users->find('list', ['limit' => 200]);
+        $this->set(compact('traduction', 'chansons', 'langues', 'users'));
     }
 
     /**

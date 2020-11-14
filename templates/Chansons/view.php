@@ -46,7 +46,10 @@
                 </tr>
             </table>
             <div class="related">
-                <h4><?= __('Related Chanson Films') ?></h4>
+                <h4>
+                	<?= __('Related Chanson Films') ?>
+                	<?= $this->Html->link('+', ['action' => 'addFilm', $chanson->slug, 'controller' => 'ChansonFilms']) ?>
+                </h4>
                 <?php if (count($chanson->chanson_films)) : ?>
                 <div class="table-responsive">
                     <table>
@@ -69,7 +72,10 @@
                 <?php endif; ?>
             </div>
             <div class="related">
-                <h4><?= __('Related Chanson Shows') ?></h4>
+                <h4>
+                	<?= __('Related Chanson Shows') ?>
+                	<?= $this->Html->link('+', ['action' => 'addShow', $chanson->slug, 'controller' => 'ChansonShows']) ?>
+                </h4>
                 <?php if (count($chanson->chanson_shows)) : ?>
                 <div class="table-responsive">
                     <table>

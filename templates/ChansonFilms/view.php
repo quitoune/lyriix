@@ -31,8 +31,8 @@
                     <td><?= h($chansonFilm->scene) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Utilisateur') ?></th>
-                    <td><?= $chansonFilm->has('utilisateur') ? $this->Html->link($chansonFilm->utilisateur->id, ['controller' => 'Utilisateurs', 'action' => 'view', $chansonFilm->utilisateur->id]) : '' ?></td>
+                    <th><?= __('User') ?></th>
+                    <td><?= $chansonFilm->has('user') ? $this->Html->link($chansonFilm->user->id, ['controller' => 'Users', 'action' => 'view', $chansonFilm->user->id]) : '' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

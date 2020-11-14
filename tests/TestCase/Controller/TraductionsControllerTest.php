@@ -25,7 +25,7 @@ class TraductionsControllerTest extends TestCase
         'app.Traductions',
         'app.Chansons',
         'app.Langues',
-        'app.Utilisateurs',
+        'app.Users',
     ];
 
     /**

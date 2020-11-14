@@ -66,14 +66,21 @@ $this->disableAutoLayout();
                         <h3 style="color: white;"><?= __('Elements') ?></h3>
                         <ul>
                         <li><?= $this->Html->link(__('Films'), ['action' => 'index', 'controller' => 'Films']) ?></li>
+                        <li><?= $this->Html->link(__('Songs Films'), ['action' => 'index', 'controller' => 'ChansonFilms']) ?></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3 style="color: white;"><?= __('Elements') ?></h3>
+                        <ul>
                         <li><?= $this->Html->link(__('Shows'), ['action' => 'index', 'controller' => 'Shows']) ?></li>
+                        <li><?= $this->Html->link(__('Songs Shows'), ['action' => 'index', 'controller' => 'ChansonShows']) ?></li>
                         </ul>
                     </div>
                     <div class="column">
                         <h3 style="color: white;"><?= __('Elements') ?></h3>
                         <ul>
                         <li><?= $this->Html->link(__('Translations'), ['action' => 'index', 'controller' => 'Traductions']) ?></li>
-                        <li><?= $this->Html->link(__('Users'), ['action' => 'index', 'controller' => 'Utilisateurs']) ?></li>
+                        <li><?= $this->Html->link(__('Users'), ['action' => 'index', 'controller' => 'Users']) ?></li>
                         </ul>
                     </div>
                 </div>

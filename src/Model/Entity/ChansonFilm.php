@@ -19,8 +19,8 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\Chanson $chanson
  * @property \App\Model\Entity\Film $film
- * @property \App\Model\Entity\Utilisateur $createur
- * @property \App\Model\Entity\Utilisateur $modificateur
+ * @property \App\Model\Entity\User $createur
+ * @property \App\Model\Entity\User $modificateur
  */
 class ChansonFilm extends Entity
 {

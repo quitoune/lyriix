@@ -25,7 +25,7 @@ class ChansonsTableTest extends TestCase
      */
     protected $fixtures = [
         'app.Chansons',
-        'app.Utilisateurs',
+        'app.Users',
         'app.ChansonFilms',
         'app.ChansonShows',
         'app.Traductions',
