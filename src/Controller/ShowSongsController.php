@@ -41,7 +41,7 @@ class ShowSongsController extends AppController
             'contain' => ['Songs', 'Shows', 'Createurs', 'Modificateurs'],
         ]);
         
-        $this->set('title', __('Song-Show'));
+        $this->set('title', __('Show-Song'));
 
         $this->set(compact('showSong'));
     }
@@ -58,10 +58,10 @@ class ShowSongsController extends AppController
         $showSongs = $this->ShowSongs->find('threaded', array(
             'conditions' => array('show_id' => $show_id),
             'contain' => ['Songs', 'Shows', 'Createurs', 'Modificateurs'],
-            'order' => ['episode' => 'ASC']
+            'order' => ['saison' => 'ASC', 'episode' => 'ASC']
         ));
         
-        $this->set('title', __('Song-Show'));
+        $this->set('title', __('Show-Song'));
         
         $this->set(compact('showSongs'));
     }
@@ -96,7 +96,7 @@ class ShowSongsController extends AppController
             'order' => array('titre' => 'ASC')
         ));
         
-        $this->set('title', __('Add Song-Show'));
+        $this->set('title', __('Add Show-Song'));
         $this->set(compact('showSong', 'songs', 'shows'));
     }    
     
@@ -132,7 +132,7 @@ class ShowSongsController extends AppController
             'order' => array('titre' => 'ASC')
         ));
         
-        $this->set('title', __('Add Song-Show'));
+        $this->set('title', __('Add Show-Song'));
         $this->set(compact('showSong', 'song', 'shows'));
     }
 

@@ -20,31 +20,29 @@
             <table>
                 <tr>
                     <th><?= __('Song') ?></th>
-                    <td><?= $filmSong->has('song') ? $this->Html->link($filmSong->song->id, ['controller' => 'Songs', 'action' => 'view', $filmSong->song->id]) : '' ?></td>
+                    <td><?= $this->Html->link($filmSong->song->titre, ['controller' => 'Songs', 'action' => 'view', $filmSong->song->titre]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Film') ?></th>
-                    <td><?= $filmSong->has('film') ? $this->Html->link($filmSong->film->id, ['controller' => 'Films', 'action' => 'view', $filmSong->film->id]) : '' ?></td>
+                    <td><?= $this->Html->link($filmSong->film->titre, ['controller' => 'Films', 'action' => 'view', $filmSong->film->titre]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Scene') ?></th>
                     <td><?= h($filmSong->scene) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('User') ?></th>
-                    <td><?= $filmSong->has('user') ? $this->Html->link($filmSong->user->id, ['controller' => 'Users', 'action' => 'view', $filmSong->user->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($filmSong->id) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Creation') ?></th>
-                    <td><?= h($filmSong->creation) ?></td>
+                    <td>
+                    <?= h($filmSong->creation) . ' ' . __('by') . ' ' ?>
+                    <?= $this->Html->link($filmSong->createur->pseudo, ['controller' => 'Users', 'action' => 'view', $filmSong->createur->pseudo]) ?>
+                    </td>
                 </tr>
                 <tr>
                     <th><?= __('Modification') ?></th>
-                    <td><?= h($filmSong->modification) ?></td>
+                    <td>
+                    <?= h($filmSong->modification) . ' ' . __('by') . ' ' ?>
+                    <?= $this->Html->link($filmSong->modificateur->pseudo, ['controller' => 'Users', 'action' => 'view', $filmSong->modificateur->pseudo]) ?>
+                    </td>
                 </tr>
             </table>
         </div>

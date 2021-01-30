@@ -2,6 +2,8 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\ArtistSong $artistSong
+ * @var \App\Model\Entity\Song $songs
+ * @var \App\Model\Entity\Artist $artists
  */
 ?>
 <div class="row">
@@ -17,9 +19,17 @@
             <fieldset>
                 <legend><?= __('Add Artist Song') ?></legend>
                 <?php
-                    echo $this->Form->control('artist_id', ['options' => $artists]);
-                    echo $this->Form->control('song_id', ['options' => $songs]);
-                    echo $this->Form->control('featuring');
+                    $opt_song = array();
+                    foreach ($songs as $song){
+                        $opt_song[$song->id] = $song->titre;
+                    }
+                    $opt_artist = array();
+                    foreach ($artists as $artist){
+                        $opt_artist [$artist->id] = $artist->nom;
+                    }
+                    echo $this->Form->control('song_id', ['options' => $opt_song]);
+                    echo $this->Form->control('artist_id', ['options' => $opt_artist]);
+                    echo $this->Form->control('featuring', ['options'=> array(__('No'), __('Yes'))]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

@@ -20,35 +20,33 @@
             <table>
                 <tr>
                     <th><?= __('Song') ?></th>
-                    <td><?= $showSong->has('song') ? $this->Html->link($showSong->song->id, ['controller' => 'Songs', 'action' => 'view', $showSong->song->id]) : '' ?></td>
+                    <td><?= $this->Html->link($showSong->song->titre, ['controller' => 'Songs', 'action' => 'view', $showSong->song->slug]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Show') ?></th>
-                    <td><?= $showSong->has('show') ? $this->Html->link($showSong->show->id, ['controller' => 'Shows', 'action' => 'view', $showSong->show->id]) : '' ?></td>
+                    <td><?= $this->Html->link($showSong->show->titre, ['controller' => 'Shows', 'action' => 'view', $showSong->show->slug]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Episode') ?></th>
-                    <td><?= h($showSong->episode) ?></td>
+                    <td><?= h('S' . ($showSong->saison < 10 ? '0' : '') . $showSong->saison . 'E' . ($showSong->episode < 10 ? '0' : '') . $showSong->episode) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Scene') ?></th>
                     <td><?= h($showSong->scene) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('User') ?></th>
-                    <td><?= $showSong->has('user') ? $this->Html->link($showSong->user->id, ['controller' => 'Users', 'action' => 'view', $showSong->user->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($showSong->id) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Creation') ?></th>
-                    <td><?= h($showSong->creation) ?></td>
+                    <td>
+                    <?= h($showSong->creation) . ' ' . __('by') . ' ' ?>
+                    <?= $this->Html->link($showSong->createur->pseudo, ['controller' => 'Users', 'action' => 'view', $showSong->createur->pseudo]) ?>
+                    </td>
                 </tr>
                 <tr>
                     <th><?= __('Modification') ?></th>
-                    <td><?= h($showSong->modification) ?></td>
+                    <td>
+                    <?= h($showSong->modification) . ' ' . __('by') . ' ' ?>
+                    <?= $this->Html->link($showSong->modificateur->pseudo, ['controller' => 'Users', 'action' => 'view', $showSong->modificateur->pseudo]) ?>
+                    </td>
                 </tr>
             </table>
         </div>

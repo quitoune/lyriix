@@ -12,7 +12,6 @@
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('slug') ?></th>
                     <th><?= $this->Paginator->sort('nom') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
@@ -21,12 +20,11 @@
                 <?php foreach ($artists as $artist): ?>
                 <tr>
                     <td><?= $this->Number->format($artist->id) ?></td>
-                    <td><?= h($artist->slug) ?></td>
                     <td><?= h($artist->nom) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $artist->id]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $artist->slug]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $artist->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $artist->id], ['confirm' => __('Are you sure you want to delete # {0}?', $artist->id)]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $artist->id], ['confirm' => __('Are you sure you want to delete # {0}?', $artist->nom)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -35,11 +33,11 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ') ?>
+            <?= $this->Paginator->prev('< ') ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(' >') ?>
+            <?= $this->Paginator->last(' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>

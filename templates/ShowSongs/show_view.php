@@ -12,7 +12,6 @@
             <tr>
                 <th><?= __('Id') ?></th>
                 <th><?= __('Song') ?></th>
-                <th><?= __('Saison') ?></th>
                 <th><?= __('Episode') ?></th>
                 <th><?= __('Scene') ?></th>
             </tr>
@@ -20,8 +19,7 @@
             <tr>
                 <td><?= h($showSong->id) ?></td>
                 <td><?= $this->Html->link($showSong->song->titre, ['controller' => 'Songs', 'action' => 'view', $showSong->song->slug]) ?></td>
-                <td><?= h($showSong->saison) ?></td>
-                <td><?= h($showSong->episode) ?></td>
+                <td><?= h('S' . ($showSong->saison < 10 ? '0' : '') . $showSong->saison . 'E' . ($showSong->episode < 10 ? '0' : '') . $showSong->episode) ?></td>
                 <td><?= h($showSong->scene) ?></td>
             </tr>
             <?php endforeach; ?>

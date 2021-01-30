@@ -21,22 +21,22 @@
                 <tr>
                     <th><?= __('Titre') ?></th>
                     <td><?= h($film->titre) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Realisateur') ?></th>
-                    <td><?= h($film->realisateur) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Annee') ?></th>
                     <td><?= h($film->annee) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Creation') ?></th>
-                    <td><?= h($film->creation) ?></td>
+                    <th><?= __('Realisateur') ?></th>
+                    <td><?= h($film->realisateur) ?></td>
+                    <th></th>
+                    <td></td>
                 </tr>
                 <tr>
-                    <th><?= __('Modification') ?></th>
-                    <td><?= h($film->modification) ?></td>
+                	<th><?= __('Creation') ?></th>
+                    <td><?= h($film->creation->format('d/m/Y à H:i')) . __(' par ') . h($film->createur->pseudo) ?>
+                	</td>
+                	<th><?= __('Dernière modification: ') ?></th>
+                    <td><?= h($film->modification->format('d/m/Y H:i')) . ' (' . h($film->modificateur->pseudo) . ')' ?>
+                	</td>
                 </tr>
             </table>
             <div id="songs"></div>

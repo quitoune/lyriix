@@ -23,7 +23,7 @@ class FilmSongsController extends AppController
         ];
         $filmSongs = $this->paginate($this->FilmSongs);
         
-        $this->set('title', __('Song-Film'));
+        $this->set('title', __('Film-Song'));
 
         $this->set(compact('filmSongs'));
     }
@@ -41,7 +41,7 @@ class FilmSongsController extends AppController
             'contain' => ['Songs', 'Films', 'Createurs', 'Modificateurs'],
         ]);
         
-        $this->set('title', __('Song-Film'));
+        $this->set('title', __('Film-Song'));
 
         $this->set(compact('filmSong'));
     }
@@ -99,7 +99,7 @@ class FilmSongsController extends AppController
             'order' => array('titre' => 'ASC')
         ));
         
-        $this->set('title', __('Add Song-Film'));
+        $this->set('title', __('Add Film-Song'));
         $this->set(compact('filmSong', 'songs', 'films'));
     }
     
@@ -134,7 +134,7 @@ class FilmSongsController extends AppController
             'order' => array('titre' => 'ASC')
         ));
         
-        $this->set('title', __('Add Song-Film'));
+        $this->set('title', __('Add Film-Song'));
         $this->set(compact('filmSong', 'song', 'films'));
     }
 

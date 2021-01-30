@@ -23,7 +23,7 @@
                 <tr>
                     <td><?= $this->Number->format($translation->id) ?></td>
                     <td><?= $translation->has('song') ? $this->Html->link($translation->song->titre, ['controller' => 'Songs', 'action' => 'view', $translation->song->slug]) : '' ?></td>
-                    <td><?= $translation->has('langue') ? $this->Html->link($translation->langue->nom, ['controller' => 'languages', 'action' => 'view', $translation->langue->code]) : '' ?></td>
+                    <td><?= $translation->has('language') ? $this->Html->link($translation->language->nom, ['controller' => 'languages', 'action' => 'view', $translation->language->code]) : '' ?></td>
                     <td><?= h($translation->modification) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $translation->id]) ?>

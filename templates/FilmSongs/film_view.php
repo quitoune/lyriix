@@ -24,6 +24,6 @@
         </table>
     </div>
     <?php else: ?>
-    <span class="center"><?= __('No songs associated to the show.'); ?></span>
+    <span class="center"><?= __('No songs associated to the film.'); ?></span>
     <?php endif; ?>
 </div>

@@ -13,6 +13,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Createurs
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Modificateurs
+ * @property \App\Model\Table\ArtistSongs&\Cake\ORM\Association\HasMany $ArtistSongs
  * @property \App\Model\Table\FilmSongsTable&\Cake\ORM\Association\HasMany $FilmSongs
  * @property \App\Model\Table\ShowSongsTable&\Cake\ORM\Association\HasMany $ShowSongs
  * @property \App\Model\Table\TranslationsTable&\Cake\ORM\Association\HasMany $Translations
@@ -55,10 +56,13 @@ class SongsTable extends Table
             'className' => 'Users',
             'foreignKey' => 'modificateur_id',
         ]);
-        $this->hasMany('SongFilms', [
+        $this->hasMany('ArtistSongs', [
             'foreignKey' => 'song_id',
         ]);
-        $this->hasMany('SongShows', [
+        $this->hasMany('FilmSongs', [
+            'foreignKey' => 'song_id',
+        ]);
+        $this->hasMany('ShowSongs', [
             'foreignKey' => 'song_id',
         ]);
         $this->hasMany('Translations', [

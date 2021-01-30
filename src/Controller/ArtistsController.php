@@ -18,23 +18,30 @@ class ArtistsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'order' => ['nom' => 'ASC']
+        ];
         $artists = $this->paginate($this->Artists);
-
+        
+        $this->set('title', __('Artists'));
         $this->set(compact('artists'));
     }
 
     /**
      * View method
      *
-     * @param string|null $id Artist id.
+     * @param string|null $slug Artist slug.
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($slug = null)
     {
-        $artist = $this->Artists->get($id, [
-            'contain' => ['ArtistSongs'],
-        ]);
+        $artist = $this->Artists->find('threaded', array(
+            'conditions' => array('slug' => $slug),
+            'contain' => ['ArtistSongs', 'ArtistSongs.Songs'],
+        ))->firstOrFail();
+        
+        $this->set('title', $artist->nom);
 
         $this->set(compact('artist'));
     }

@@ -15,8 +15,6 @@
                     <th><?= $this->Paginator->sort('song_id') ?></th>
                     <th><?= $this->Paginator->sort('film_id') ?></th>
                     <th><?= $this->Paginator->sort('scene') ?></th>
-                    <th><?= $this->Paginator->sort('creation') ?></th>
-                    <th><?= $this->Paginator->sort('modification') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -27,8 +25,6 @@
                     <td><?= $filmSong->has('song') ? $this->Html->link($filmSong->song->titre, ['controller' => 'Songs', 'action' => 'view', $filmSong->song->slug]) : '' ?></td>
                     <td><?= $filmSong->has('film') ? $this->Html->link($filmSong->film->titre, ['controller' => 'Films', 'action' => 'view', $filmSong->film->slug]) : '' ?></td>
                     <td><?= h($filmSong->scene) ?></td>
-                    <td><?= h($filmSong->creation) ?></td>
-                    <td><?= h($filmSong->modification) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $filmSong->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $filmSong->id]) ?>

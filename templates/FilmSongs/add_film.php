@@ -1,7 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\FilmSong $songFilm
+ * @var \App\Model\Entity\FilmSong $filmSong
  * @var \App\Model\Entity\Song $song
  * @var \App\Model\Entity\Film $films
  */
@@ -15,7 +15,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="songFilms form content">
-            <?= $this->Form->create($songFilm) ?>
+            <?= $this->Form->create($filmSong) ?>
             <fieldset>
                 <legend><?= __('Add Film Song') ?></legend>
                 <?php

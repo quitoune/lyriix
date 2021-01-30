@@ -19,41 +19,25 @@
             <h3><?= h($artist->id) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('Slug') ?></th>
-                    <td><?= h($artist->slug) ?></td>
-                </tr>
-                <tr>
                     <th><?= __('Nom') ?></th>
                     <td><?= h($artist->nom) ?></td>
                 </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($artist->id) ?></td>
-                </tr>
             </table>
             <div class="related">
-                <h4><?= __('Related Artist Songs') ?></h4>
+                <h4><?= __('Related Songs') ?></h4>
                 <?php if (!empty($artist->artist_songs)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Artist Id') ?></th>
-                            <th><?= __('Song Id') ?></th>
-                            <th><?= __('Featuring') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= __('Song') ?></th>
                         </tr>
                         <?php foreach ($artist->artist_songs as $artistSongs) : ?>
                         <tr>
                             <td><?= h($artistSongs->id) ?></td>
-                            <td><?= h($artistSongs->artist_id) ?></td>
-                            <td><?= h($artistSongs->song_id) ?></td>
-                            <td><?= h($artistSongs->featuring) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'ArtistSongs', 'action' => 'view', $artistSongs->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'ArtistSongs', 'action' => 'edit', $artistSongs->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'ArtistSongs', 'action' => 'delete', $artistSongs->id], ['confirm' => __('Are you sure you want to delete # {0}?', $artistSongs->id)]) ?>
-                            </td>
+
+                            <td><?= $this->Html->link(h($artistSongs->song->titre), ['action' => 'view', $artistSongs->song->slug, 'controller' => 'Songs']) ?></td>
+
                         </tr>
                         <?php endforeach; ?>
                     </table>

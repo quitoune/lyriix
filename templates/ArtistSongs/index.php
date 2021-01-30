@@ -22,9 +22,9 @@
                 <?php foreach ($artistSongs as $artistSong): ?>
                 <tr>
                     <td><?= $this->Number->format($artistSong->id) ?></td>
-                    <td><?= $artistSong->has('artist') ? $this->Html->link($artistSong->artist->id, ['controller' => 'Artists', 'action' => 'view', $artistSong->artist->id]) : '' ?></td>
-                    <td><?= $artistSong->has('song') ? $this->Html->link($artistSong->song->id, ['controller' => 'Songs', 'action' => 'view', $artistSong->song->id]) : '' ?></td>
-                    <td><?= $this->Number->format($artistSong->featuring) ?></td>
+                    <td><?= $artistSong->has('artist') ? $this->Html->link($artistSong->artist->nom, ['controller' => 'Artists', 'action' => 'view', $artistSong->artist->slug]) : '' ?></td>
+                    <td><?= $artistSong->has('song') ? $this->Html->link($artistSong->song->titre, ['controller' => 'Songs', 'action' => 'view', $artistSong->song->slug]) : '' ?></td>
+                    <td><?= ($this->Number->format($artistSong->featuring) ? 'Yes' : 'No') ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $artistSong->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $artistSong->id]) ?>
@@ -37,11 +37,11 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ') ?>
+            <?= $this->Paginator->prev('< ') ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(' >') ?>
+            <?= $this->Paginator->last(' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>

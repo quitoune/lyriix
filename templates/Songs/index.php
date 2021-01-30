@@ -13,6 +13,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('titre') ?></th>
+                    <th><?= __('Artists') ?></th>
                     <th><?= $this->Paginator->sort('annee') ?></th>
                     <th><?= $this->Paginator->sort('modification') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
@@ -23,6 +24,19 @@
                 <tr>
                     <td><?= $this->Number->format($song->id) ?></td>
                     <td><?= h($song->titre) ?></td>
+                    <td>
+                    	<?php 
+                            $artists = array('featuring' => array(), 'main' => array());
+                            foreach($song->artist_songs as $artist_song){
+                                if($artist_song->featuring){
+                                    $artists['featuring'][$artist_song->artist->slug] = $artist_song->artist->nom;
+                                } else {
+                                    $artists['main'][$artist_song->artist->slug] = $artist_song->artist->nom;
+                                }
+                            }
+                        ?>
+                    	<?= implode(', ', $artists['main']) . (count($artists['featuring']) ? ' feat. ' : '') . implode(', ', $artists['featuring']) ?>
+                    </td>
                     <td><?= h($song->annee) ?></td>
                     <td><?= h($song->modification) ?></td>
                     <td class="actions">

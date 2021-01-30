@@ -22,7 +22,9 @@ class ArtistSongsController extends AppController
             'contain' => ['Artists', 'Songs'],
         ];
         $artistSongs = $this->paginate($this->ArtistSongs);
-
+        
+        $this->set('title', __('Artist-Song'));
+        
         $this->set(compact('artistSongs'));
     }
 
@@ -38,6 +40,8 @@ class ArtistSongsController extends AppController
         $artistSong = $this->ArtistSongs->get($id, [
             'contain' => ['Artists', 'Songs'],
         ]);
+        
+        $this->set('title', __('Artist-Song'));
 
         $this->set(compact('artistSong'));
     }
@@ -59,8 +63,18 @@ class ArtistSongsController extends AppController
             }
             $this->Flash->error(__('The artist song could not be saved. Please, try again.'));
         }
-        $artists = $this->ArtistSongs->Artists->find('list', ['limit' => 200]);
-        $songs = $this->ArtistSongs->Songs->find('list', ['limit' => 200]);
+        
+        $this->set('title', __('Add Artist-Song'));
+        $artists = $this->ArtistSongs->Artists->find('threaded', array(
+            'contain' => ['ArtistSongs.Artists'],
+            'limit' => 200,
+            'order' => array('nom' => 'ASC')
+        ));
+        $songs = $this->ArtistSongs->Songs->find('threaded', array(
+            'contain' => ['ArtistSongs.Songs'],
+            'limit' => 200,
+            'order' => array('titre' => 'ASC')
+        ));
         $this->set(compact('artistSong', 'artists', 'songs'));
     }
 

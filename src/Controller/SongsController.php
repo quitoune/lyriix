@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Routing\Router;
+
 /**
  * Songs Controller
  *
@@ -35,6 +37,7 @@ class SongsController extends AppController
     public function index()
     {
         $this->paginate = [
+            'contain' => ['ArtistSongs', 'ArtistSongs.Artists'],
             'order' => ['id' => 'DESC']
         ];
         $songs = $this->paginate($this->Songs);
@@ -55,12 +58,21 @@ class SongsController extends AppController
     {
         $song = $this->Songs->find('threaded', array(
             'conditions' => array('slug' => $slug),
-            'contain' => ['Createurs', 'FilmSongs', 'FilmSongs.Films', 'ShowSongs', 'ShowSongs.Shows', 'Modificateurs', 'Translations', 'Translations.Langues'],
+            'contain' => ['ArtistSongs', 'ArtistSongs.Artists', 'Createurs', 'FilmSongs', 'FilmSongs.Films', 'ShowSongs', 'ShowSongs.Shows', 'Modificateurs', 'Translations', 'Translations.Languages'],
         ))->firstOrFail();
         
         $this->set('title', $song->titre);
         
-        $this->set(compact('song'));
+        $artists = array('featuring' => array(), 'main' => array());
+        foreach($song->artist_songs as $artist_song){
+            if($artist_song->featuring){
+                $artists['featuring'][] = '<a href="' . Router::url(['controller' => 'Artists', 'action' => 'view', $artist_song->artist->slug]) . '">' . $artist_song->artist->nom . '</a>';
+            } else {
+                $artists['main'][] = '<a href="' . Router::url(['controller' => 'Artists', 'action' => 'view', $artist_song->artist->slug]) . '">' . $artist_song->artist->nom . '</a>';
+            }
+        }
+        
+        $this->set(compact('song', 'artists'));
     }
 
     /**
