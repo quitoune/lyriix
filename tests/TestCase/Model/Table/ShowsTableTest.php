@@ -25,8 +25,9 @@ class ShowsTableTest extends TestCase
      */
     protected $fixtures = [
         'app.Shows',
-        'app.Users',
-        'app.ChansonShows',
+        'app.Createurs',
+        'app.Modificateurs',
+        'app.ShowSongs',
     ];
 
     /**

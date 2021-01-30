@@ -39,7 +39,7 @@ class ShowsController extends AppController
     {
         $show = $this->Shows->find('all', array(
             'conditions' => array('slug' => $slug),
-            'contain' => ['Createurs', 'Modificateurs', 'ChansonShows'],
+            'contain' => ['Createurs', 'Modificateurs', 'ShowSongs'],
         ))->firstOrFail();
         
         

@@ -67,7 +67,7 @@ class AppController extends Controller
         // à fonctionner. Autorise également les actions "read-only".
         $this->Auth->allow(['display', 'view', 'index', 'home', 'add', 'edit', 'delete']);
         $this->Auth->allow(['addShow', 'showView', 'addFilm', 'showFilm']);
-        $this->Auth->allow(['logout', 'login', 'langueView']);
+        $this->Auth->allow(['logout', 'login', 'languageView']);
     }
     
     public function createSlug(string $title): string

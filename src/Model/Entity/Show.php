@@ -19,7 +19,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\User $createur
  * @property \App\Model\Entity\User $modificateur
- * @property \App\Model\Entity\ChansonShow[] $chanson_shows
+ * @property \App\Model\Entity\ShowSong[] $show_songs
  */
 class Show extends Entity
 {
@@ -42,6 +42,6 @@ class Show extends Entity
         'modificateur_id' => true,
         'createur' => true,
         'modificateur' => true,
-        'chanson_shows' => true,
+        'show_songs' => true,
     ];
 }

@@ -13,7 +13,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Createurs
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Modificateurs
- * @property \App\Model\Table\ChansonShowsTable&\Cake\ORM\Association\HasMany $ChansonShows
+ * @property \App\Model\Table\ShowSongsTable&\Cake\ORM\Association\HasMany $ShowSongs
  *
  * @method \App\Model\Entity\Show newEmptyEntity()
  * @method \App\Model\Entity\Show newEntity(array $data, array $options = [])
@@ -53,7 +53,7 @@ class ShowsTable extends Table
             'className' => 'Users',
             'foreignKey' => 'modificateur_id',
         ]);
-        $this->hasMany('ChansonShows', [
+        $this->hasMany('ShowSongs', [
             'foreignKey' => 'show_id',
         ]);
     }

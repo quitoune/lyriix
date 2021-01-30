@@ -39,13 +39,13 @@
                     <td><?= h($film->modification) ?></td>
                 </tr>
             </table>
-            <div id="chansons"></div>
+            <div id="songs"></div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var link_chansons = "<?= $this->Url->build(["controller" => "ChansonFilms", "action" => "filmView", $film->id]);?>";
-		Ajax(link_chansons, "#chansons");
+		var link_songs = "<?= $this->Url->build(["controller" => "FilmSongs", "action" => "filmView", $film->id]);?>";
+		Ajax(link_songs, "#songs");
 	});
 </script>

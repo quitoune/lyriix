@@ -12,7 +12,7 @@
  * @since     0.10.0
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Chanson[]|\Cake\Collection\CollectionInterface $chansons
+ * @var \App\Model\Entity\Song[]|\Cake\Collection\CollectionInterface $songs
  */
 
 $this->disableAutoLayout();
@@ -46,8 +46,8 @@ $this->disableAutoLayout();
                     <div class="column">
                         <h3><?= __('Lasts song added') ?></h3>
                         <ul>
-                        	<?php foreach ($chansons as $chanson): ?>
-                        		<li><?= h($chanson->titre) ?></li>
+                        	<?php foreach ($songs as $song): ?>
+                        		<li><?= h($song->titre) ?></li>
                         	<?php endforeach; ?>
                         </ul>
                     </div>
@@ -57,7 +57,7 @@ $this->disableAutoLayout();
                     <div class="column">
                         <h3><?= __('Elements') ?></h3>
                         <ul>
-                        <li class=""><?= $this->Html->link(__('Songs'), ['action' => 'index', 'controller' => 'Chansons']) ?></li>
+                        <li class=""><?= $this->Html->link(__('Songs'), ['action' => 'index', 'controller' => 'Songs']) ?></li>
                         </ul>
                     </div>
                     <div class="column">
@@ -70,7 +70,7 @@ $this->disableAutoLayout();
                     <div class="column">
                         <h3 style="color: white;"><?= __('Elements') ?></h3>
                         <ul>
-                        <li class=""><?= $this->Html->link(__('Translations'), ['action' => 'index', 'controller' => 'Traductions']) ?></li>
+                        <li class=""><?= $this->Html->link(__('Translations'), ['action' => 'index', 'controller' => 'Translations']) ?></li>
                         <li class=""><?= $this->Html->link(__('Users'), ['action' => 'index', 'controller' => 'Users']) ?></li>
                         </ul>
                     </div>

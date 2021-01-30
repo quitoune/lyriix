@@ -13,7 +13,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Createurs
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Modificateurs
- * @property \App\Model\Table\ChansonFilmsTable&\Cake\ORM\Association\HasMany $ChansonFilms
+ * @property \App\Model\Table\FilmSongsTable&\Cake\ORM\Association\HasMany $FilmSongs
  *
  * @method \App\Model\Entity\Film newEmptyEntity()
  * @method \App\Model\Entity\Film newEntity(array $data, array $options = [])
@@ -53,7 +53,7 @@ class FilmsTable extends Table
             'className' => 'Users',
             'foreignKey' => 'modificateur_id',
         ]);
-        $this->hasMany('ChansonFilms', [
+        $this->hasMany('FilmSongs', [
             'foreignKey' => 'film_id',
         ]);
     }

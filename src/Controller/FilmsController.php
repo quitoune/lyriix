@@ -39,7 +39,7 @@ class FilmsController extends AppController
     {
         $film = $this->Films->find('all', array(
             'conditions' => array('slug' => $slug),
-            'contain' => ['Createurs', 'Modificateurs', 'ChansonFilms', 'ChansonFilms.Chansons'],
+            'contain' => ['Createurs', 'Modificateurs', 'FilmSongs', 'FilmSongs.Songs'],
         ))->firstOrFail();
         
         $this->set('title', $film->titre);

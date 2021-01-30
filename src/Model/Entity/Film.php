@@ -20,7 +20,7 @@ use Cake\ORM\Entity;
  *
  * @property \App\Model\Entity\User $createur
  * @property \App\Model\Entity\User $modificateur
- * @property \App\Model\Entity\ChansonFilm[] $chanson_films
+ * @property \App\Model\Entity\FilmShow[] $film_shows
  */
 class Film extends Entity
 {
@@ -44,6 +44,6 @@ class Film extends Entity
         'modificateur_id' => true,
         'createur' => true,
         'modificateur' => true,
-        'chanson_films' => true,
+        'film_shows' => true,
     ];
 }

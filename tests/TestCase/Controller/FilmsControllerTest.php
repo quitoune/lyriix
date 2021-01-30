@@ -23,8 +23,9 @@ class FilmsControllerTest extends TestCase
      */
     protected $fixtures = [
         'app.Films',
-        'app.Users',
-        'app.ChansonFilms',
+        'app.Createurs',
+        'app.Modificateurs',
+        'app.FilmSongs',
     ];
 
     /**
