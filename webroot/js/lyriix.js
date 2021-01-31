@@ -25,5 +25,11 @@ function Ajax(url, id_done, method){
 }
 
 $(document).ready(function(){
-	$("select").select2();
+	$("select.select").select2();
+	$("select.select-nosearch").select2({ 
+		minimumResultsForSearch: -1
+	});
+	$("select.select-multiple").select2({ 
+		multiple: true 
+	});
 });

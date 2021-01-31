@@ -43,8 +43,20 @@ class SongsController extends AppController
         $songs = $this->paginate($this->Songs);
         
         $this->set('title', __('Songs'));
+        $artists = array();
         
-        $this->set(compact('songs'));
+        foreach($songs as $song){
+            $artists[$song->id] = array('featuring' => array(), 'main' => array());
+            foreach($song->artist_songs as $artist_song){
+                if($artist_song->featuring){
+                    $artists[$song->id]['featuring'][] = '<a href="' . Router::url(['controller' => 'Artists', 'action' => 'view', $artist_song->artist->slug]) . '">' . $artist_song->artist->nom . '</a>';
+                } else {
+                    $artists[$song->id]['main'][] = '<a href="' . Router::url(['controller' => 'Artists', 'action' => 'view', $artist_song->artist->slug]) . '">' . $artist_song->artist->nom . '</a>';
+                }
+            }
+        }
+        
+        $this->set(compact('songs', 'artists'));
     }
 
     /**
@@ -85,19 +97,42 @@ class SongsController extends AppController
         $song = $this->Songs->newEmptyEntity();
         if ($this->request->is('post')) {
             $data = $this->preCreationObjet($this->request->getData());
-            $data['slug'] = $this->createSlug($data['titre']);
-            
-            $song = $this->Songs->patchEntity($song, $data);
-            if ($this->Songs->save($song)) {
+            if ($this->Songs->addPost($data)) {
                 $this->Flash->success(__('The song has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The song could not be saved. Please, try again.'));
         }
         
         $this->set('title', __('Add a song'));
-        $this->set(compact('song'));
+        $all_artists = $this->Songs->ArtistSongs->Artists->find('threaded', array(
+            'order' => array('nom' => 'ASC')
+        ));
+        
+        
+        $artists = array();
+        foreach ($all_artists as $artist){
+            $artists [$artist->id] = $artist->nom;
+        }
+        
+        $opt = array(
+            'main' => array(
+                'id' => 'artists-main',
+                'name' => 'artists_main[]',
+                'classe' => 'select-multiple',
+                'label' => __('Main artists'),
+                'multiple' => true
+            ),
+            'featuring' => array(
+                'id' => 'artists-featuring',
+                'name' => 'artists_featuring[]',
+                'classe' => 'select-multiple',
+                'label' => __('Featuring artists'),
+                'multiple' => true
+            )
+        );
+        
+        $this->set(compact('song', 'artists', 'opt'));
     }
 
     /**

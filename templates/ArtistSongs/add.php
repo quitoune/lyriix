@@ -19,17 +19,9 @@
             <fieldset>
                 <legend><?= __('Add Artist Song') ?></legend>
                 <?php
-                    $opt_song = array();
-                    foreach ($songs as $song){
-                        $opt_song[$song->id] = $song->titre;
-                    }
-                    $opt_artist = array();
-                    foreach ($artists as $artist){
-                        $opt_artist [$artist->id] = $artist->nom;
-                    }
-                    echo $this->Form->control('song_id', ['options' => $opt_song]);
-                    echo $this->Form->control('artist_id', ['options' => $opt_artist]);
-                    echo $this->Form->control('featuring', ['options'=> array(__('No'), __('Yes'))]);
+                    echo $this->Form->control('song_id', ['options' => $songs, 'class' => 'select']);
+                    echo $this->Form->control('artist_id', ['options' => $artists, 'class' => 'select']);
+                    echo $this->Form->control('featuring', ['options'=> array(__('No'), __('Yes')), 'class' => 'select-nosearch']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

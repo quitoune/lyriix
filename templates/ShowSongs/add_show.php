@@ -24,7 +24,7 @@
                         $opt_show[$show->id] = $show->titre;
                     }
                     echo $this->Form->control('song_id', ['type' => 'hidden', 'value' => $song->id]);
-                    echo $this->Form->control('show_id', ['options' => $opt_show]);
+                    echo $this->Form->control('show_id', ['options' => $opt_show, 'class' => 'select']);
                     echo "<div class='row'>";
                     echo "<div class='column'>";
                     echo $this->Form->control('saison');

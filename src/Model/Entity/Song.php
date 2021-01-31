@@ -39,7 +39,6 @@ class Song extends Entity
     protected $_accessible = [
         'slug' => true,
         'titre' => true,
-        'interprete' => true,
         'annee' => true,
         'paroles' => true,
         'creation' => true,

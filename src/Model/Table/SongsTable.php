@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
@@ -32,7 +30,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Song[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Song[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class SongsTable extends Table
+class SongsTable extends AppTable
 {
     /**
      * Initialize method
@@ -102,7 +100,6 @@ class SongsTable extends Table
 
         $validator
             ->scalar('paroles')
-            ->maxLength('paroles', 255)
             ->requirePresence('paroles', 'create')
             ->notEmptyString('paroles');
 
@@ -131,5 +128,37 @@ class SongsTable extends Table
         $rules->add($rules->existsIn(['modificateur_id'], 'Modificateurs'), ['errorField' => 'modificateur_id']);
 
         return $rules;
+    }
+    
+    public function addPost($data)
+    {
+        $artist_main = (isset($data['artists_main']) ? $data['artists_main'] : array());
+        $artist_featuring = (isset($data['artists_featuring']) ? $data['artists_featuring'] : array());
+        
+        $data['slug'] = $this->createSlug($data['titre']);
+        $chanson = $this->findBySlug($data['slug'])->first();
+        if($chanson->id){
+            $data['slug'] = $this->createSlug($data['titre'] . "-" . str_replace(",", " ", $data['artists']));
+        }
+        
+        $data['artist_songs'] = array();
+        
+        foreach ($artist_main as $artist) {
+            $data['artist_songs'][] = array(
+                'artist_id' => $artist,
+                'featuring' => 0
+            );
+        }
+        foreach ($artist_featuring as $artist) {
+            $data['artist_songs'][] = array(
+                'artist_id' => $artist,
+                'featuring' => 1
+            );
+        }
+        
+        if($this->save($this->patchEntity($this->newEmptyEntity(), $data))){
+            return true;
+        }
+        return false;
     }
 }

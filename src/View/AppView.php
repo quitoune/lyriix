@@ -38,4 +38,35 @@ class AppView extends View
     public function initialize(): void
     {
     }
+    
+    public function createSelect($data, $options = array()): string
+    {
+        $opt['id'] = '';
+        $opt['name'] = '';
+        $opt['classe'] = '';
+        $opt['label'] = '';
+        $opt['multiple'] = false;
+        $opt['default'] = true;
+        $opt['change'] = false;
+        
+        foreach($options as $key => $value){
+            if(isset($opt[$key])){
+                $opt[$key] = $value;
+            }
+        }
+        
+        $select = '<div class="input select">';
+        $select .=  '<label for="' . $opt['id'] . '">' . $opt['label'] . '</label>';
+        $select .=   '<select name="' . $opt['name'] . '" class="' . $opt['classe'] . '" id="' . $opt['id'] . '" ' . ($opt['multiple'] ? 'multiple' : '') . ($opt['change'] ? ' onchange="' . $opt['change'] . '"' : '') . '>';
+        if($opt['default']){
+            $select .=   '<option></option>';
+        }
+        foreach($data as $id => $nom){
+            $select .=   '<option value="' . $id . '">' . $nom . '</option>';
+        }
+        $select .=   '</select>';
+        $select .=   '</div>';
+        
+        return $select;
+    }
 }

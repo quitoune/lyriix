@@ -16,10 +16,7 @@
             <?= $this->Form->create($artist) ?>
             <fieldset>
                 <legend><?= __('Add Artist') ?></legend>
-                <?php
-                    echo $this->Form->control('slug');
-                    echo $this->Form->control('nom');
-                ?>
+                <?= $this->Form->control('nom') ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>

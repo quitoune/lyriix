@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
-use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
@@ -30,7 +28,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Translation[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
  * @method \App\Model\Entity\Translation[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  */
-class TranslationsTable extends Table
+class TranslationsTable extends AppTable
 {
     /**
      * Initialize method

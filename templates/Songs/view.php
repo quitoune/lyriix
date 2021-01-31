@@ -28,13 +28,13 @@
                     <td><?= h($song->annee) ?></td>
                 </tr>
                 <tr>
-                    <th colspan="2"><?= __('Lyrics') ?></th>
+                    <th colspan="2"><?= __('Artists') ?></th>
                 </tr>
                 <tr>
                     <td colspan="2"><?= implode(', ', $artists['main']) . (count($artists['featuring']) ? ' feat. ' : '') . implode(', ', $artists['featuring']) ?></td>
                 </tr>
                 <tr>
-                    <th colspan="2"><?= __('Artists') ?></th>
+                    <th colspan="2"><?= __('Lyrics') ?></th>
                 </tr>
                 <tr>
                     <td colspan="2"><?= preg_replace("#\\n#", "<br>", $song->paroles) ?></td>

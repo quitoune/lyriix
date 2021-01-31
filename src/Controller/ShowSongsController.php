@@ -111,7 +111,6 @@ class ShowSongsController extends AppController
         $showSong = $this->ShowSongs->newEmptyEntity();
         if ($this->request->is('post')) {
             $data = $this->preCreationObjet($this->request->getData());
-            $data['episode'] = "S" . intval($data['saison']). "E" . (intval($data["episode"]) < 10 ? "0" . intval($data["episode"]) : intval($data["episode"]));
             
             $showSong = $this->ShowSongs->patchEntity($showSong, $data);
             if ($this->ShowSongs->save($showSong)) {

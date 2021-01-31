@@ -16,7 +16,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="artists view content">
-            <h3><?= h($artist->id) ?></h3>
+            <h3><?= __('ID') . ': ' . h($artist->id) ?></h3>
             <table>
                 <tr>
                     <th><?= __('Nom') ?></th>
@@ -24,13 +24,13 @@
                 </tr>
             </table>
             <div class="related">
-                <h4><?= __('Related Songs') ?></h4>
+                <h4><?= __('Songs') ?></h4>
                 <?php if (!empty($artist->artist_songs)) : ?>
                 <div class="table-responsive">
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Song') ?></th>
+                            <th><?= __('Title') ?></th>
                         </tr>
                         <?php foreach ($artist->artist_songs as $artistSongs) : ?>
                         <tr>

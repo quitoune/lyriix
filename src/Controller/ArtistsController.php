@@ -55,7 +55,10 @@ class ArtistsController extends AppController
     {
         $artist = $this->Artists->newEmptyEntity();
         if ($this->request->is('post')) {
-            $artist = $this->Artists->patchEntity($artist, $this->request->getData());
+            $data = $this->request->getData();
+            $data['slug'] = $this->createSlug($data['nom']);
+            
+            $artist = $this->Artists->patchEntity($artist, $data);
             if ($this->Artists->save($artist)) {
                 $this->Flash->success(__('The artist has been saved.'));
 
@@ -63,6 +66,7 @@ class ArtistsController extends AppController
             }
             $this->Flash->error(__('The artist could not be saved. Please, try again.'));
         }
+        $this->set('title', __('Add an artist'));
         $this->set(compact('artist'));
     }
 

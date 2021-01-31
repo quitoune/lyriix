@@ -65,16 +65,22 @@ class ArtistSongsController extends AppController
         }
         
         $this->set('title', __('Add Artist-Song'));
-        $artists = $this->ArtistSongs->Artists->find('threaded', array(
+        $all_artists = $this->ArtistSongs->Artists->find('threaded', array(
             'contain' => ['ArtistSongs.Artists'],
-            'limit' => 200,
             'order' => array('nom' => 'ASC')
         ));
-        $songs = $this->ArtistSongs->Songs->find('threaded', array(
+        $all_songs = $this->ArtistSongs->Songs->find('threaded', array(
             'contain' => ['ArtistSongs.Songs'],
-            'limit' => 200,
             'order' => array('titre' => 'ASC')
         ));
+        $songs = array();
+        foreach ($all_songs as $song){
+            $songs[$song->id] = $song->titre;
+        }
+        $artists = array();
+        foreach ($all_artists as $artist){
+            $artists [$artist->id] = $artist->nom;
+        }
         $this->set(compact('artistSong', 'artists', 'songs'));
     }
 

@@ -2,6 +2,8 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Song $song
+ * @var \App\Model\Entity\Artist $artists
+ * @var array $opt
  */
 ?>
 <div class="row">
@@ -16,14 +18,30 @@
             <?= $this->Form->create($song) ?>
             <fieldset>
                 <legend><?= __('Add Song') ?></legend>
-                <?php
-                    echo $this->Form->control('titre');
-                    echo $this->Form->control('annee');
-                    echo $this->Form->textarea('paroles', ['maxlength' => '', 'class' => 'paroles']);
-                ?>
+                <?= $this->Form->control('titre') ?>
+                <?= $this->Form->control('annee') ?>
+                <?= $this->Form->control('artists', ['type' => 'hidden']) ?>
+                <?= $this->createSelect($artists, $opt['main']) ?>
+                <?= $this->createSelect($artists, $opt['featuring']) ?>
+                <div class="input textarea">
+                <label for="paroles"><?= __('Lyrics') ?></label>
+                <?= $this->Form->textarea('paroles', ['maxlength' => '', 'class' => 'paroles', 'label' => __('Lyrics')]) ?>
+                </div>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#artists-main").change(function(){
+			var artists = "";
+			$(this).find("option:selected").each(function(){ 
+				artists += $(this).text() + ",";
+			});
+			$("#artists").val(artists);
+		});
+	});
+</script>
