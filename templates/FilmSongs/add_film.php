@@ -24,7 +24,7 @@
                         $opt_film[$film->id] = $film->titre;
                     }
                     echo $this->Form->control('song_id', ['type' => 'hidden', 'value' => $song->id]);
-                    echo $this->Form->control('film_id', ['options' => $opt_film]);
+                    echo $this->Form->control('film_id', ['options' => $opt_film, 'class' => 'select']);
                     echo $this->Form->control('scene');
                 ?>
             </fieldset>

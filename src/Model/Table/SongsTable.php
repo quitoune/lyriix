@@ -137,7 +137,7 @@ class SongsTable extends AppTable
         
         $data['slug'] = $this->createSlug($data['titre']);
         $chanson = $this->findBySlug($data['slug'])->first();
-        if($chanson->id){
+        if(!is_null($chanson)){
             $data['slug'] = $this->createSlug($data['titre'] . "-" . str_replace(",", " ", $data['artists']));
         }
         
