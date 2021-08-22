@@ -55,3 +55,7 @@ textarea.paroles {
 div.input.select {
 	margin-bottom: 1.5rem;
 }
+
+li.active {
+	font-weight: bold;
+}

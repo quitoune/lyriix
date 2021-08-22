@@ -20,9 +20,8 @@
                 <?php foreach ($artists as $artist): ?>
                 <tr>
                     <td><?= $this->Number->format($artist->id) ?></td>
-                    <td><?= h($artist->nom) ?></td>
+                    <td><?= $this->Html->link($artist->nom, ['action' => 'view', $artist->slug]) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $artist->slug]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $artist->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $artist->id], ['confirm' => __('Are you sure you want to delete # {0}?', $artist->nom)]) ?>
                     </td>

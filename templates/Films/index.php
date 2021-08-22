@@ -23,12 +23,11 @@
                 <?php foreach ($films as $film): ?>
                 <tr>
                     <td><?= $this->Number->format($film->id) ?></td>
-                    <td><?= h($film->titre) ?></td>
+                    <td><?= urldecode($this->Html->link(h($film->titre), ['action' => 'view', $film->slug])) ?></td>
                     <td><?= h($film->realisateur) ?></td>
                     <td><?= h($film->annee) ?></td>
                     <td><?= h($film->modification) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $film->slug]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $film->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $film->id], ['confirm' => __('Are you sure you want to delete # {0}?', $film->id)]) ?>
                     </td>

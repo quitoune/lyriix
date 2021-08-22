@@ -22,11 +22,10 @@
                 <?php foreach ($shows as $show): ?>
                 <tr>
                     <td><?= $this->Number->format($show->id) ?></td>
-                    <td><?= h($show->titre) ?></td>
+                    <td><?= $this->Html->link(h($show->titre), ['action' => 'view', $show->slug]) ?></td>
                     <td><?= h($show->annee) ?></td>
                     <td><?= h($show->modification) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $show->slug]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $show->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $show->id], ['confirm' => __('Are you sure you want to delete # {0}?', $show->id)]) ?>
                     </td>
