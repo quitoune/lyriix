@@ -53,7 +53,7 @@ class ShowSongsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function showView($show_id = null)
+    public function preview($show_id = null)
     {
         $showSongs = $this->ShowSongs->find('threaded', array(
             'conditions' => array('show_id' => $show_id),

@@ -53,11 +53,11 @@ class FilmSongsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function filmView($film_id = null)
+    public function preview($film_id = null)
     {
         $filmSongs = $this->FilmSongs->find('threaded', array(
             'conditions' => array('film_id' => $film_id),
-            'contain' => ['Songs', 'Films', 'Createurs', 'Modificateurs'],
+            'contain' => ['Songs', 'Films'],
             'order' => ['Films.titre' => 'ASC']
         ));
         

@@ -23,27 +23,13 @@
                     <td><?= h($artist->nom) ?></td>
                 </tr>
             </table>
-            <div class="related">
-                <h4><?= __('Songs') ?></h4>
-                <?php if (!empty($artist->artist_songs)) : ?>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th><?= __('Id') ?></th>
-                            <th><?= __('Title') ?></th>
-                        </tr>
-                        <?php foreach ($artist->artist_songs as $artistSongs) : ?>
-                        <tr>
-                            <td><?= h($artistSongs->id) ?></td>
-
-                            <td><?= $this->Html->link(h($artistSongs->song->titre), ['action' => 'view', $artistSongs->song->slug, 'controller' => 'Songs']) ?></td>
-
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
-                </div>
-                <?php endif; ?>
-            </div>
+            <div id="songs"></div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var link_songs = "<?= $this->Url->build(["controller" => "ArtistSongs", "action" => "preview", $artist->id]);?>";
+		Ajax(link_songs, "#songs");
+	});
+</script>

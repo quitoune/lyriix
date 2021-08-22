@@ -45,7 +45,7 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var link_songs = "<?= $this->Url->build(["controller" => "FilmSongs", "action" => "filmView", $film->id]);?>";
+		var link_songs = "<?= $this->Url->build(["controller" => "FilmSongs", "action" => "preview", $film->id]);?>";
 		Ajax(link_songs, "#songs");
 	});
 </script>

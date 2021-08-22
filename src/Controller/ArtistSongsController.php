@@ -39,13 +39,37 @@ class ArtistSongsController extends AppController
     {
         $artistSong = $this->ArtistSongs->get($id, [
             'contain' => ['Artists', 'Songs'],
+            'order' => [
+                'Songs.annee' => 'ASC',
+                'Songs.titre' => 'ASC'
+            ]
         ]);
         
         $this->set('title', __('Artist-Song'));
 
         $this->set(compact('artistSong'));
     }
-
+    
+    /**
+     * Preview method
+     *
+     * @param string $artist_id Artist id.
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function preview($artist_id = null)
+    {
+        $artistSongs = $this->ArtistSongs->find('threaded', array(
+            'conditions' => array('artist_id' => $artist_id),
+            'contain' => ['Songs', 'Artists'],
+            'order' => [
+                'Songs.annee' => 'ASC',
+                'Songs.titre' => 'ASC'
+            ]
+        ));
+        
+        $this->set(compact('artistSongs'));
+    }
     /**
      * Add method
      *

@@ -39,7 +39,7 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		var link_songs = "<?= $this->Url->build(["controller" => "ShowSongs", "action" => "showView", $show->id]);?>";
+		var link_songs = "<?= $this->Url->build(["controller" => "ShowSongs", "action" => "preview", $show->id]);?>";
 		Ajax(link_songs, "#songs");
 	});
 </script>
