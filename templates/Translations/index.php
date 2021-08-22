@@ -43,6 +43,6 @@
             <?= $this->Paginator->next(' >') ?>
             <?= $this->Paginator->last(' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Showing {{current}} item(s) out of {{count}} total')) ?></p>
     </div>
 </div>
