@@ -1,4 +1,6 @@
 <?php
+use App\Model\Entity\User;
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,6 +15,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  * @var string $title
+ * @var User $utilisateur
  */
 ?>
 <!DOCTYPE html>
@@ -21,7 +24,11 @@
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
+    	<?php if (isset($title)): ?>
         <?= $title ?>
+        <?php else: ?>
+        Lyriix
+        <?php endif; ?>
     </title>
     <?= $this->Html->meta('icon') ?>
 
@@ -38,7 +45,12 @@
             <a href="<?= $this->Url->build('/') ?>"><span>Ly</span>riix</a>
         </div>
         <div class="top-nav-links">
+        	<?php if (isset($utilisateur)): ?>
+        	<?= $utilisateur->pseudo ?>
+            <?= $this->Html->link(__('Logout'), ['action' => 'logout', 'controller' => 'Users']) ?>
+            <?php else: ?>
             <?= $this->Html->link(__('Login'), ['action' => 'login', 'controller' => 'Users']) ?>
+        	<?php endif; ?>
         </div>
     </nav>
     <main class="main">

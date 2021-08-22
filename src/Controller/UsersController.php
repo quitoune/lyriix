@@ -111,35 +111,33 @@ class UsersController extends AppController
     
     public function login()
     {
-//         if ($this->request->is('post')) {
-//             $user = $this->Auth->identify();
-//             if ($user) {
-//                 $this->Auth->setUser($user);
-//                 return $this->redirect($this->Auth->redirectUrl());
-//             }
-//             $this->Flash->error('Votre identifiant ou votre mot de passe est incorrect.');
-//         }
-        
-        
-        $this->set('title', __('Login'));
-        
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
-                if ($this->Auth->authenticationProvider()->needsPasswordRehash()) {
-                    $user = $this->Users->get($this->Auth->user('id'));
-                    $user->password = $this->request->getData('password');
-                    $this->Users->save($user);
-                }
-                return $this->redirect($this->Auth->redirectUrl());
-            }
+        $this->request->allowMethod(['get', 'post']);
+        $result = $this->Authentication->getResult();
+        if ($result->isValid()) {
+            $redirect = $this->request->getQuery('redirect', [
+                'controller' => 'Songs',
+                'action' => 'home',
+            ]);
+            
+            return $this->redirect($redirect);
+        }
+        if ($this->request->is('post') && !$result->isValid()) {
+            $this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect.'));
         }
     }
     
     public function logout()
     {
-        $this->Flash->success('Vous avez été déconnecté.');
-        return $this->redirect($this->Auth->logout());
+        $result = $this->Authentication->getResult();
+        if ($result->isValid()) {
+            $this->Authentication->logout();
+            return $this->redirect(['controller' => 'Songs', 'action' => 'home']);
+        }
+    }
+    
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['login', 'add']);
     }
 }

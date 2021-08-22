@@ -42,32 +42,12 @@ class AppController extends Controller
     {
         parent::initialize();
 
-        $this->loadComponent('RequestHandler');
-        $this->loadComponent('Flash');
-
-        $this->loadComponent('Auth', [
-            'authorize'=> 'Controller',
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'pseudo',
-                        'password' => 'password'
-                    ]
-                ]
-            ],
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login'
-            ],
-            // Si pas autorisé, on renvoit sur la page précédente
-            'unauthorizedRedirect' => $this->referer()
+        $this->loadComponent('RequestHandler', [
+            'checkHttpCache' => false
         ]);
+        $this->loadComponent('Flash');
+        $this->loadComponent('Authentication.Authentication');
         
-        // Permet à l'action "display" de notre PagesController de continuer
-        // à fonctionner. Autorise également les actions "read-only".
-        $this->Auth->allow(['display', 'view', 'index', 'home', 'add', 'edit', 'delete']);
-        $this->Auth->allow(['addShow', 'showView', 'filmView', 'addFilm', 'showFilm']);
-        $this->Auth->allow(['logout', 'login', 'languageView']);
     }
     
     public function createSlug(string $title): string
@@ -79,7 +59,7 @@ class AppController extends Controller
         $slug = preg_replace('#&[^;]+;#', '', $slug);
         
         $slug = str_replace(array("/", "\\", "'"), '-', $slug);
-        $slug = str_replace(array("?", ",", "(", ")", ":", "[", "]", '"'), '', $slug);
+        $slug = str_replace(array("?", ",", ":", "[", "]", '"'), '', $slug);
         $slug = trim($slug);
         $slug = implode("_", explode(' ', $slug));
         
@@ -97,8 +77,8 @@ class AppController extends Controller
         $date = date("Y-m-d H:i:s");
         $data = $info;
         $data['modification'] = $date;
-        $data['modificateur_id'] = 1;
-//         $data['modificateur_id'] = $this->Auth->user('id');
+        $user_id = $this->request->getAttribute('identity')->getOriginalData()->id;
+        $data['modificateur_id'] = $user_id;
         
         return $data;
     }
@@ -109,11 +89,25 @@ class AppController extends Controller
         $data = $info;
         $data['creation'] = $date;
         $data['modification'] = $date;
-        $data['createur_id'] = 1;
-        $data['modificateur_id'] = 1;
-//         $data['createur_id'] = $this->Auth->user('id');
-//         $data['modificateur_id'] = $this->Auth->user('id');
+        $user_id = $this->request->getAttribute('identity')->getOriginalData()->id;
+        $data['createur_id'] = $user_id;
+        $data['modificateur_id'] = $user_id;
         
         return $data;
+    }
+    
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['home', 'index', 'view', 'preview']);
+    }
+    
+    public function beforeRender(\Cake\Event\EventInterface $event)
+    {
+        $this->beforeFilter($event);
+        if(!is_null($this->request->getAttribute('identity'))){
+            $utilisateur = $this->request->getAttribute('identity')->getOriginalData();
+            $this->set('utilisateur', $utilisateur);
+        }
     }
 }

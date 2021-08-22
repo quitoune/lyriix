@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\View\AppView $this
+ * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
 <div class="users index content">
@@ -13,7 +14,6 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('pseudo') ?></th>
                     <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('password') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -23,7 +23,6 @@
                     <td><?= $this->Number->format($user->id) ?></td>
                     <td><?= h($user->pseudo) ?></td>
                     <td><?= h($user->email) ?></td>
-                    <td><?= h($user->password) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
@@ -42,6 +41,6 @@
             <?= $this->Paginator->next(__('next') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Showing {{current}} item(s) out of {{count}} total')) ?></p>
     </div>
 </div>
