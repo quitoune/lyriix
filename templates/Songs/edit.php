@@ -22,12 +22,9 @@
             <fieldset>
                 <legend><?= __('Edit Song') ?></legend>
                 <?php
-                    echo $this->Form->control('slug');
                     echo $this->Form->control('titre');
                     echo $this->Form->control('annee');
                     echo $this->Form->control('paroles');
-                    echo $this->Form->control('creation', ['empty' => true]);
-                    echo $this->Form->control('modification', ['empty' => true]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

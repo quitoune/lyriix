@@ -78,13 +78,13 @@ class ShowSongsTable extends AppTable
             ->scalar('saison')
             ->maxLength('saison', 10)
             ->requirePresence('saison', 'create')
-            ->notEmptyString('saison');
+            ->allowEmptyString('saison');
         
         $validator
             ->scalar('episode')
             ->maxLength('episode', 10)
             ->requirePresence('episode', 'create')
-            ->notEmptyString('episode');
+            ->allowEmptyString('episode');
 
         $validator
             ->scalar('scene')

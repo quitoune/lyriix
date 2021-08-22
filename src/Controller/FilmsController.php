@@ -56,13 +56,14 @@ class FilmsController extends AppController
     {
         $film = $this->Films->newEmptyEntity();
         if ($this->request->is('post')) {
-            $date = date("Y-m-d H:i:s");
-            $data = $this->request->getData();
-            $data['creation'] = $date;
-            $data['modification'] = $date;
-            $data['createur_id'] = 1;
-            $data['modificateur_id'] = 1;
+            $data = $this->preCreationObjet($this->request->getData());
             $data['slug'] = $this->createSlug($data['titre']);
+            $movie = $this->Films->find('all', array(
+                'conditions' => array('slug' => $data['slug'])
+            ))->first();
+            if(!is_null($movie)){
+                $data['slug'] = $this->createSlug($data['titre'] . "_(" . $data['annee'] . ")");
+            }
             
             $film = $this->Films->patchEntity($film, $data);
             if ($this->Films->save($film)) {
@@ -90,7 +91,8 @@ class FilmsController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $film = $this->Films->patchEntity($film, $this->request->getData());
+            $data = $this->updateModification($this->request->getData());
+            $film = $this->Films->patchEntity($film, $data);
             if ($this->Films->save($film)) {
                 $this->Flash->success(__('The film has been saved.'));
 

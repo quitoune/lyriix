@@ -37,7 +37,7 @@ class SongsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['ArtistSongs', 'ArtistSongs.Artists'],
+            'contain' => ['ArtistSongs', 'ArtistSongs.Artists', 'Createurs', 'Modificateurs'],
             'order' => ['id' => 'DESC']
         ];
         $songs = $this->paginate($this->Songs);
@@ -148,7 +148,7 @@ class SongsController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $data = $this->preCreationObjet($this->request->getData());
+            $data = $this->updateModification($this->request->getData());
             $song = $this->Songs->patchEntity($song, $data, [
                 'accessibleFields' => ['createur_id' => false]
             ]);
@@ -159,8 +159,9 @@ class SongsController extends AppController
             }
             $this->Flash->error(__('The song could not be saved. Please, try again.'));
         }
-        $users = $this->Songs->Users->find('list', ['limit' => 200]);
-        $this->set(compact('song', 'users'));
+        
+        $this->set('title', __('Edit a song'));
+        $this->set(compact('song'));
     }
 
     /**
@@ -186,8 +187,6 @@ class SongsController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
-        // Les actions 'add' et 'tags' sont toujours autorisés pour les user
-        // authentifiés sur l'application
         if (in_array($action, ['add', 'edit'])) {
             return true;
         }

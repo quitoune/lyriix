@@ -38,7 +38,7 @@ class ArtistsController extends AppController
     {
         $artist = $this->Artists->find('threaded', array(
             'conditions' => array('slug' => $slug),
-            'contain' => ['ArtistSongs', 'ArtistSongs.Songs'],
+            'contain' => ['ArtistSongs', 'ArtistSongs.Songs']
         ))->firstOrFail();
         
         $this->set('title', $artist->nom);

@@ -20,6 +20,7 @@ class ShowsController extends AppController
     {
         $this->paginate = [
             'contain' => ['Createurs', 'Modificateurs'],
+            'order' => ['titre' => 'ASC']
         ];
         $shows = $this->paginate($this->Shows);
         
